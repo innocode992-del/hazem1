@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>حفظني الكلمات — Save My Words</title>
 <meta name="description" content="موقع ذكي لتعلم وحفظ الكلمات في جميع اللغات">
 <meta name="theme-color" content="#070a1c">
@@ -17,8 +17,8 @@
 [data-theme=light]{--bg:#eceffd;--tx:#141838;--mu:#56608f;--gl:rgba(255,255,255,.78);--bd:rgba(80,70,160,.25);--inb:rgba(255,255,255,.9);--drb:linear-gradient(180deg,#fff,#e6e9ff)}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-html{height:100%;overflow:hidden;overscroll-behavior:none;touch-action:pan-x pan-y}
-body{height:100vh;height:100dvh;min-height:0;display:flex;flex-direction:column;font-family:Cairo,"Segoe UI",Tahoma,system-ui,sans-serif;color:var(--tx);background:var(--bg);overflow:hidden;overscroll-behavior:none;touch-action:pan-x pan-y}
+html{scroll-behavior:smooth}
+body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;font-family:Cairo,"Segoe UI",Tahoma,system-ui,sans-serif;color:var(--tx);background:var(--bg);overflow-x:hidden}
 button,input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--cy);outline-offset:3px}
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(60% 50% at 12% 8%,rgba(139,92,246,.38),transparent 70%),radial-gradient(50% 45% at 92% 28%,rgba(34,211,238,.22),transparent 70%),radial-gradient(80% 50% at 50% 115%,rgba(59,130,246,.34),transparent 70%),var(--bg)}
@@ -53,8 +53,8 @@ header{position:sticky;top:0;z-index:30;direction:ltr;display:grid;grid-template
 .chips{display:flex;flex-wrap:wrap;gap:10px;padding-bottom:5px}
 .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;margin-top:18px;padding-bottom:6px}
 /* layout */
-main{flex:1;min-height:0;height:0;width:min(1100px,100%);margin:0 auto;padding:clamp(10px,1.8vh,22px) clamp(10px,2vw,24px);position:relative;overflow:hidden}
-.screen{display:none;height:100%;max-height:100%;min-height:0;overflow:hidden}.screen.on{display:flex;flex-direction:column;animation:in .35s both}
+main{flex:1;width:min(1100px,100%);margin:0 auto;padding:clamp(14px,3vw,30px) clamp(12px,3vw,24px) 40px;position:relative}
+.screen{display:none}.screen.on{display:block;animation:in .45s both}
 @keyframes in{from{opacity:0;transform:translateY(14px) scale(.985)}}
 .gl{background:var(--gl);border:1px solid var(--bd);border-radius:24px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,.12) inset,0 26px 50px -22px rgba(0,0,0,.75),0 0 44px -16px var(--pu)}
 .lbl{color:var(--mu);font-weight:700}
@@ -155,79 +155,33 @@ footer .dev{font-weight:800}
 @media(max-width:700px){footer{justify-content:center;text-align:center}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-/* Fixed viewport: no page scrolling or browser zoom */
-html,body{overscroll-behavior:none;overflow:hidden}
-body{width:100%;position:fixed;inset:0}
-main{overscroll-behavior:none}
-.screen.on{overflow:hidden}
-#home{justify-content:flex-start;gap:clamp(6px,1.2vh,14px)}
-#home .hero{padding:clamp(2px,1vh,10px) 0 clamp(4px,1vh,12px);flex:none}
-#home .hero h1{font-size:clamp(1.45rem,4.2vw,3.2rem);line-height:1.12}
-#home .hero p{font-size:clamp(.78rem,1.4vw,1.05rem);margin-top:5px}
-#home .hero h1::after{height:3px;margin-top:5px}
-#home .addc{padding:clamp(9px,1.6vh,18px);flex:none}
-#home .fg{margin-top:8px;gap:10px}
-#home .row{margin-top:10px;padding-bottom:0}
-#home .stats{margin-top:0;gap:7px;flex:none}
-#home .stats span{padding:5px 11px;font-size:.85rem}
-#home .keys{margin-top:0;padding:0;gap:clamp(7px,1vw,14px);grid-template-columns:repeat(5,minmax(0,1fr));flex:1;min-height:0;align-items:stretch}
-#home .key{min-height:0;padding:8px 5px;justify-content:center;font-size:clamp(.72rem,1.1vw,.95rem);border-radius:17px}
-#home .key .ic{font-size:clamp(1.3rem,3vw,2.2rem)}
-#library,#settings{gap:8px}
-#library h2,#settings h2{margin:0;flex:none}
-#library> .gl{padding:9px!important;margin:0!important;flex:none}
-#libList{min-height:0;flex:1;overflow:hidden;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-content:start;gap:6px}
-#libList .wr{margin:0;padding:7px 9px;gap:5px;border-radius:12px;min-width:0}
-#libList .wr b{font-size:.95rem}
-#libList .wr small{font-size:.7rem}
-#libList .dots{display:none}
-#libList .wa{gap:3px}
-#libList .wa .ib{width:30px;height:30px;font-size:.85rem}
-#settings #setDyn{min-height:0;flex:1;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#settings .sg{padding:9px 12px;margin:0;min-height:0;overflow:hidden}
-#settings .sr{padding:5px 0;font-size:.8rem}
-#settings .st .ib{width:32px;height:32px}
-#settings .tg{transform:scale(.8)}
-#settings .row{margin-top:7px;gap:6px}
-#settings .btn{padding:8px 11px;font-size:.8rem}
-#practice,#result{justify-content:center}
-#practice .pc,#result .pc{max-height:100%;overflow:hidden}
-footer{flex:none;padding:6px 12px;font-size:.75rem}
-#excelTools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:9px}
-#excelTools .btn{padding:9px 14px;font-size:.88rem}
-@media(max-width:700px){
- header{flex:none}
- main{padding:7px 8px}
- #home .hero{display:none}
- #home .addc{padding:8px}
- #home .fg{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
- #home .fld label{font-size:.75rem}
- #home .in input{font-size:.9rem;padding:7px 4px}
- #home .in .chip{padding:6px;font-size:.7rem}
- #home .chips{gap:5px}
- #home .chip{padding:6px 9px;font-size:.75rem}
- #home .keys{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
- #home .key{font-size:.65rem;padding:5px 2px;border-radius:12px;box-shadow:0 3px 0 var(--d)}
- #home .key .ic{font-size:1.25rem}
- #home .stats span{font-size:.7rem;padding:4px 7px}
- #excelTools .btn{font-size:.72rem;padding:7px 9px}
- #libList{grid-template-columns:1fr}
- #settings #setDyn{grid-template-columns:1fr 1fr}
- footer{font-size:.65rem;gap:4px}
-}
-@media(max-height:720px){
- header{padding-top:5px;padding-bottom:5px}
- #home .hero{display:none}
- #home .addc{padding:8px}
- #home .keys{gap:6px}
- #home .key{padding:5px}
- footer{padding:3px 8px}
-}
-@media(max-width:380px){
- #home .fg{grid-template-columns:1fr}
- #home .key{font-size:.58rem}
- #settings .sr{font-size:.7rem}
-}
+/* Responsive dashboard + dedicated tool pages */
+html,body{width:100%;height:100%;min-height:0;overflow:hidden;overscroll-behavior:none}
+body{height:100dvh}
+main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidden;display:flex;flex-direction:column}
+.screen{display:none;min-height:0;height:100%;overflow:hidden;overscroll-behavior:contain;padding:4px}
+.screen.on{display:block}
+#home.screen.on{display:flex;flex-direction:column;overflow:hidden}
+#library.screen.on,#settings.screen.on{overflow:auto}
+.dashHero{padding:clamp(4px,1vh,12px) 0 clamp(8px,1.5vh,18px);flex:none}
+.dashHero h1{font-size:clamp(1.45rem,3.8vw,2.8rem)}.dashHero p{font-size:clamp(.78rem,1.5vw,1rem);margin-top:5px}
+.dashboard{flex:1;min-height:0;margin:0;padding:clamp(4px,1vw,12px);grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(7px,1.2vw,14px)}
+.dashboard .key{min-height:0;padding:clamp(7px,1.4vh,16px) 6px;gap:clamp(2px,.7vh,7px);justify-content:center;border-radius:clamp(12px,2vw,22px);font-size:clamp(.76rem,1.3vw,1rem);box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 5px 0 var(--d),0 12px 18px -8px var(--c1)}
+.dashboard .key .ic{font-size:clamp(1.25rem,3vw,2.35rem)}
+.dashboard .key small{font-size:clamp(.58rem,1vw,.78rem);font-weight:600;opacity:.9}
+.excelTile{--c1:#168447!important;--c2:#21a366!important;--d:#0b5b32!important}.aiTile{--c1:#2563eb!important;--c2:#06b6d4!important;--d:#1e40af!important}
+.excelLogo{display:inline-grid;place-items:center;background:#fff;color:#168447;border-radius:7px;font-weight:1000;font-family:Arial,sans-serif;width:1.5em;height:1.5em;font-size:1.05em!important;box-shadow:0 2px 6px #0004}
+.inlineX{vertical-align:middle;margin-inline-end:8px}
+.screenHead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}.screenHead h2{margin:0;font-size:clamp(1.2rem,3vw,2rem)}
+.addScreen .addc{margin:0 auto;max-width:900px}.addScreen .stats{justify-content:center}
+.toolScreen{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px}
+.toolCard{width:min(760px,100%);padding:clamp(14px,3vw,26px);display:grid;gap:14px}
+.excelCols{display:grid;grid-template-columns:1fr 1fr;gap:10px}.excelCols div{padding:14px 8px;text-align:center;border:1px solid var(--bd);border-radius:14px;background:var(--inb);font-weight:800}
+.excelChoose{display:inline-flex;justify-content:center;align-items:center;text-align:center}
+#aiPrompt{width:100%;min-height:120px;resize:vertical;padding:14px;border-radius:14px;border:1px solid var(--bd);background:var(--inb);color:var(--tx)}
+@media(max-width:700px){main{height:auto}.dashboard{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}.dashboard .key{padding:5px 3px}.dashboard .key small{font-size:clamp(.52rem,2vw,.68rem)}.dashHero{padding:2px 0 7px}.dashHero h1{font-size:clamp(1.2rem,5vw,1.8rem)}.dashHero p{font-size:.72rem}}
+@media(max-width:380px){.dashboard{gap:6px}.dashboard .key{font-size:.72rem}.dashboard .key .ic{font-size:1.2rem}.dashboard .key small{font-size:.5rem}.screenHead{gap:7px}.screenHead .btn{padding:8px 11px}}
+@media(max-height:650px){header{padding-block:4px}.brand svg{width:32px;height:26px}.dashHero{padding:0 0 4px}.dashHero h1{font-size:1.35rem}.dashHero p{margin-top:2px}.dashboard .key{padding:4px}.dashboard .key .ic{font-size:1.25rem}}
 
 </style>
 </head>
@@ -251,7 +205,21 @@ footer{flex:none;padding:6px 12px;font-size:.75rem}
  <section id="home" class="screen on">
   <div class="scene scL" aria-hidden="true"><div class="book"><b></b><b></b></div></div>
   <div class="scene scR" aria-hidden="true"><div class="cube" id="c1"></div><div class="cube" id="c2"></div></div>
-  <div class="hero"><h1 data-i="hero"></h1><p data-i="heroSub"></p></div>
+  <div class="hero dashHero"><h1 data-i="hero"></h1><p data-i="heroSub"></p></div>
+  <div class="keys dashboard" id="dashboard">
+   <button class="key" data-go="add"><span class="ic">✍️</span><span>كلمات جديدة</span><small>إضافة كلمة أو مجموعة</small></button>
+   <button class="key" data-go="library"><span class="ic">📚</span><span>مكتبتي</span><small>الكلمات المحفوظة</small></button>
+   <button class="key" data-start="review"><span class="ic">🔄</span><span>مراجعة الكلمات</span><small>اختبر حفظك</small></button>
+   <button class="key" data-start="dictate"><span class="ic">🎧</span><span>اسمع واملّي</span><small>تدريب الاستماع</small></button>
+   <button class="key" data-start="letters"><span class="ic">🧩</span><span>تحدي الحروف</span><small>لعبة الكلمات</small></button>
+   <button class="key excelTile" data-go="excel"><span class="ic excelLogo">X</span><span>Excel</span><small>استيراد كلمات من ملف</small></button>
+   <button class="key aiTile" data-go="ai"><span class="ic">🤖</span><span>مساعد AI</span><small>نسخ برومبت جاهز</small></button>
+   <button class="key" data-go="settings"><span class="ic">⚙️</span><span>الإعدادات</span><small>الصوت والتخصيص</small></button>
+  </div>
+ </section>
+
+ <section id="add" class="screen addScreen">
+  <div class="screenHead"><button class="btn ghost" data-go="home">← الرئيسية</button><h2>إضافة كلمات جديدة</h2></div>
   <div class="gl addc">
    <span class="lbl" data-i="lblLang"></span>
    <div id="lc" class="chips" style="margin-top:10px"></div>
@@ -261,24 +229,35 @@ footer{flex:none;padding:6px 12px;font-size:.75rem}
    </div>
    <div id="fB" class="fld" style="margin-top:16px" hidden><label for="bkIn" data-i="lblBulk"></label><div class="in"><textarea id="bkIn" rows="5" dir="auto" data-ph="phB"></textarea></div></div>
    <div class="row"><button class="btn" id="bAdd"></button><button class="btn ghost" id="bBulk"></button></div>
-   <div id="excelTools">
-    <button class="btn ghost" id="bAI">🤖 نسخ طلب AI</button>
-    <button class="btn" id="bExcel">📊 استيراد Excel</button>
-    <input type="file" id="excelFile" accept=".xlsx,.xls,.csv,text/csv" hidden>
-   </div>
   </div>
   <div class="stats" id="stats"></div>
-  <div class="keys">
-   <button class="key" data-go="settings"><span class="ic">⚙️</span><span data-i="kSet"></span></button>
-   <button class="key" data-go="library"><span class="ic">📂</span><span data-i="kLib"></span></button>
-   <button class="key" data-start="dictate"><span class="ic">🎧</span><span data-i="kDic"></span></button>
-   <button class="key" data-start="review"><span class="ic">🔄</span><span data-i="kRev"></span></button>
-   <button class="key" data-start="letters"><span class="ic">🧩</span><span data-i="kLet"></span></button>
+ </section>
+
+ <section id="excel" class="screen toolScreen">
+  <div class="screenHead"><button class="btn ghost" data-go="home">← الرئيسية</button><h2><span class="excelLogo inlineX">X</span> استيراد Excel</h2></div>
+  <div class="gl toolCard">
+   <p class="lbl">ارفع ملف Excel يحتوي على عمودين: العربي ثم الإنجليزي (أو الكلمة ثم معناها).</p>
+   <div class="excelCols"><div>🇪🇬 العمود الأول: العربي</div><div>🇬🇧 العمود الثاني: English</div></div>
+   <label class="btn excelChoose" for="excelFile">📊 اختيار ملف Excel</label>
+   <input id="excelFile" type="file" accept=".xlsx,.xls,.csv,.tsv" hidden>
+   <p class="mu" id="excelStatus">يدعم XLSX وXLS وCSV وTSV. سيتم تخطي الصفوف الفارغة والمكررة.</p>
+   <button class="btn ghost" id="excelTemplate">نسخ نموذج ترتيب الأعمدة</button>
   </div>
  </section>
 
- <section id="library" class="screen">
-  <h2 data-i="libT"></h2>
+ <section id="ai" class="screen toolScreen">
+  <div class="screenHead"><button class="btn ghost" data-go="home">← الرئيسية</button><h2>🤖 مساعد AI</h2></div>
+  <div class="gl toolCard">
+   <label class="lbl" for="aiPrompt">اكتب طلبك للذكاء الاصطناعي</label>
+   <textarea id="aiPrompt" rows="5" placeholder="مثال: استخرج الكلمات من الصورة وضع العربي في عمود والإنجليزي في العمود المقابل..."></textarea>
+   <label class="btn ghost" for="aiImage">🖼️ اختيار صورة (اختياري)</label><input id="aiImage" type="file" accept="image/*" hidden>
+   <p class="mu" id="aiImageName">لم يتم اختيار صورة</p>
+   <button class="btn" id="copyAIPrompt">📋 نسخ طلب AI</button>
+   <p class="mu">بعد النسخ، افتح أداة الذكاء الاصطناعي والصق الطلب وأرفق الصورة المختارة يدويًا.</p>
+  </div>
+ </section>
+
+ <section id="library" class="screen">  <h2 data-i="libT"></h2>
   <div class="gl" style="padding:16px;margin-bottom:16px"><div class="in"><span>🔎</span><input id="q" dir="auto" data-ph="search"></div><div id="lf" class="chips" style="margin-top:12px"></div></div>
   <div id="libList"></div>
  </section>
@@ -398,7 +377,7 @@ function buildQueue(){const pool=words.filter(w=>w.l===lang);let nw=pool.filter(
  const ord=a=>cfg.order==='rand'?shuf(a):cfg.order==='hard'?[...a].sort((x,y)=>(y.x-x.x)||(x.lv-y.lv)):[...a].sort((x,y)=>x.t-y.t);
  nw=ord(nw).slice(0,cfg.size);old=shuf(old);const q=[];let oi=0;
  for(let r=0;r<cfg.rep;r++)nw.forEach((w,i)=>{q.push({w});if(cfg.mix&&old.length&&(i+1)%cfg.every===0)q.push({w:old[oi++%old.length],old:1})});return q}
-function start(mode){if(!words.some(w=>w.l===lang)){toast(t('noWords',{l:ln(lang)}));go('home');$('#fw').focus();return}P={mode,q:buildQueue(),i:0,ok:0,tot:0,ans:0};go('practice');show()}
+function start(mode){if(!words.some(w=>w.l===lang)){toast(t('noWords',{l:ln(lang)}));go('add');$('#fw').focus();return}P={mode,q:buildQueue(),i:0,ok:0,tot:0,ans:0};go('practice');show()}
 const mlang=w=>w.l==='ar'?'en':'ar';
 function mask(w){const ch=[...w.w],ix=ch.map((c,k)=>/\s/.test(c)?-1:k).filter(k=>k>=0),h=new Set(shuf(ix).slice(0,Math.max(1,Math.round(ix.length*.45))));
  $('#mk').innerHTML=ch.map((c,k)=>/\s/.test(c)?'<i class="sp"></i>':h.has(k)?'<span class="bx h">?</span>':`<span class="bx">${esc(c)}</span>`).join('')}
@@ -420,50 +399,6 @@ function finish1(real,v){if(P.ans)return;P.ans=1;P.tot++;const it=P.q[P.i],w=it.
  $('#bSp2').onclick=()=>speak(w.w,w.l);if($('#bRe'))$('#bRe').onclick=show;$('#bNx').onclick=nextQ;$('#bNx').focus()}
 function nextQ(){P.i++;show()}
 function fin(){const acc=P.tot?Math.round(P.ok/P.tot*100):0;$('#rRing').style.setProperty('--p',acc);$('#rAcc').textContent=acc+'%';$('#rTxt').textContent=t('score',{a:P.ok,b:P.tot});$('#rEm').textContent=acc>=80?'🏆':acc>=50?'🌟':'💪';go('result')}
-/* ---------- Excel import + AI prompt ---------- */
-$('#bExcel').onclick=()=>$('#excelFile').click();
-$('#excelFile').onchange=async e=>{
- const f=e.target.files&&e.target.files[0];if(!f)return;
- const btn=$('#bExcel');btn.disabled=true;
- try{
-  let rows=[];
-  if(/\.csv$/i.test(f.name)){
-   const raw=await f.text();
-   rows=raw.split(/\r?\n/).map(line=>line.split(/[;,\t]/).map(v=>v.trim().replace(/^"|"$/g,'')));
-  }else{
-   if(!window.XLSX)throw new Error('Excel library unavailable');
-   const ab=await f.arrayBuffer(),wb=XLSX.read(ab,{type:'array'});
-   if(!wb.SheetNames.length)throw new Error('Empty workbook');
-   rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:''});
-  }
-  const clean=v=>String(v??'').trim();
-  const isArabic=v=>/[\u0600-\u06FF]/.test(String(v||''));
-  let added=0,skipped=0;
-  rows.forEach((r,i)=>{
-   if(!Array.isArray(r)||r.length<2)return;
-   let a=clean(r[0]),b=clean(r[1]);if(!a||!b)return;
-   if(i===0&&/(عربي|arabic|english|انجليزي|الإنجليزي|العربية)/i.test(a+' '+b)){return}
-   if(!isArabic(a)&&isArabic(b)){const tmp=a;a=b;b=tmp}
-   if(!isArabic(a)&&!isArabic(b)){/* keep given column order: Arabic first, English second */}
-   const result=add(a,b,'ar');if(result===1)added++;else skipped++;
-  });
-  if(added){save();renderAll()}
-  toast(`تم استيراد ${added} زوج كلمات${skipped?' — تم تخطي '+skipped+' مكرر':''}`);
- }catch(err){console.error(err);toast('تعذر قراءة الملف. استخدم Excel بصيغة XLSX أو CSV بعمود عربي وعمود English.')}
- finally{btn.disabled=false;e.target.value=''}
-};
-$('#bAI').onclick=async()=>{
- const request=window.prompt('إيه طلبك من الـ AI؟ اكتب المطلوب، وممكن ترفق صورة مع الرسالة بعد نسخ النص:','استخرج الكلمات من الصورة أو الملف، ورتبها في عمودين: العمود الأول الكلمة بالعربي، والعمود الثاني ترجمتها بالإنجليزي. كل كلمة في صف مستقل، بدون شرح إضافي، وجهّز النتيجة كجدول مناسب للاستيراد إلى Excel.');
- if(request===null)return;
- const promptText=`أريد مساعدتك في تجهيز قائمة كلمات لموقع حفظني الكلمات.\nالمطلوب: ${request}\nإذا أرفقت صورة، استخرج الكلمات منها بدقة.\nأخرج النتيجة في جدول من عمودين فقط:\nالعربي | English\nكل زوج كلمات في صف مستقل، واجعل العمود الأول عربيًا والثاني إنجليزيًا، ولا تضف ترقيمًا أو شرحًا داخل الجدول. اجعل الجدول جاهزًا للنسخ إلى Excel أو الحفظ بصيغة XLSX.`;
- try{await navigator.clipboard.writeText(promptText);toast('تم نسخ طلب AI. أرفق الصورة في المحادثة والصق الطلب.')}
- catch(err){window.prompt('انسخ طلب AI من هنا:',promptText)}
-};
-/* Prevent browser pinch/double-tap zoom and Ctrl-wheel zoom */
-document.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault()},{passive:false});
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['+','=','-','0'].includes(e.key))e.preventDefault()});
-['gesturestart','gesturechange','gestureend'].forEach(n=>document.addEventListener(n,e=>e.preventDefault(),{passive:false}));
-let lastTouchEnd=0;document.addEventListener('touchend',e=>{const now=Date.now();if(now-lastTouchEnd<=300)e.preventDefault();lastTouchEnd=now},{passive:false});
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{const b=e.target.closest('button,[data-go]');if(!b)return;const d=b.dataset;
  if(d.go)go(d.go);else if(d.start)start(d.start);
@@ -495,7 +430,7 @@ $('#bExit').onclick=()=>{P=null;go('home')};$('#bAgain').onclick=()=>start(P.mod
 $('#bHome').onclick=$('#brand').onclick=()=>go('home');
 $('#bMenu').onclick=()=>document.body.classList.add('open');
 const closeD=()=>document.body.classList.remove('open');$('#dClose').onclick=$('#scrim').onclick=closeD;
-$('#dNew').onclick=()=>{go('home');closeD();setTimeout(()=>$('#fw').focus(),50)};
+$('#dNew').onclick=()=>{go('add');closeD();setTimeout(()=>$('#fw').focus(),50)};
 const setUI=l=>{ui=l;LS.s('sw_ui',l);applyUI()};
 $('#lpAr').onclick=()=>setUI('ar');$('#lpEn').onclick=()=>setUI('en');$('#dLang').onclick=()=>setUI(ui==='ar'?'en':'ar');
 $('#bTheme').onclick=()=>{theme=theme==='dark'?'light':'dark';LS.s('sw_theme',theme);applyUI()};
@@ -504,6 +439,37 @@ addEventListener('online',stat);addEventListener('offline',stat);
 /* 3D tilt on buttons (mouse only) */
 document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const el=e.target.closest('.key,.btn,.speak3d');if(!el)return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--rx',(-y*14).toFixed(1)+'deg');el.style.setProperty('--ry',(x*14).toFixed(1)+'deg')});
 document.addEventListener('pointerout',e=>{const el=e.target.closest&&e.target.closest('.key,.btn,.speak3d');if(el&&!el.contains(e.relatedTarget)){el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')}});
+/* Excel import + AI prompt tools */
+const excelFile=$('#excelFile');
+if(excelFile)excelFile.addEventListener('change',async e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ const status=$('#excelStatus');status.textContent='جارٍ قراءة الملف...';
+ try{
+  let rows=[];
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(ext==='csv'||ext==='tsv'){
+   const txt=await file.text();const delim=ext==='tsv'?'\t':(txt.includes(';')&&!txt.includes(',')?';':',');
+   rows=txt.replace(/^\uFEFF/,'').split(/\r?\n/).map(line=>line.split(delim).map(v=>v.trim().replace(/^"|"$/g,'')));
+  }else{
+   if(!window.XLSX)throw new Error('تعذر تحميل قارئ Excel. اتصل بالإنترنت ثم أعد المحاولة.');
+   const data=await file.arrayBuffer();const wb=XLSX.read(data,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:''});
+  }
+  let added=0,skipped=0;
+  lang='en';LS.s('sw_lang',lang);renderChips();
+  rows.forEach((r,i)=>{if(!Array.isArray(r)||r.length<2)return;let a=String(r[0]??'').trim(),b=String(r[1]??'').trim();if(!a||!b)return;
+   if(i===0&&(/عربي|arabic|كلمة|word/i.test(a)||/english|إنجليزي|انجليزي|معنى/i.test(b))){return;}
+   // Import Arabic in the meaning field and English as the vocabulary item.
+   const isArabic=x=>/[\u0600-\u06FF]/.test(x);
+   let word=isArabic(a)&&!isArabic(b)?b:a,meaning=isArabic(a)&&!isArabic(b)?a:b;
+   const before=words.length;const result=add(word,meaning,lang);if(result===1)added++;else skipped++;
+  });
+  if(added){save();renderAll();status.textContent=`تم استيراد ${added} كلمة بنجاح. تم تخطي ${skipped} صف فارغ أو مكرر.`;toast(`تم استيراد ${added} كلمة`)}else status.textContent='لم تتم إضافة كلمات. تأكد أن العمود الأول عربي والثاني إنجليزي وأن الصفوف تحتوي على كلمتين.';
+ }catch(err){status.textContent=err.message||'حدث خطأ أثناء قراءة الملف.';}
+ e.target.value='';
+});
+$('#excelTemplate').onclick=()=>{const sample='العربي\tEnglish\nتفاحة\tApple\nكتاب\tBook';if(navigator.clipboard?.writeText)navigator.clipboard.writeText(sample).then(()=>toast('تم نسخ نموذج الأعمدة')).catch(()=>toast('تعذر النسخ'));else toast('المتصفح لا يدعم النسخ التلقائي')};
+$('#aiImage').onchange=e=>$('#aiImageName').textContent=e.target.files?.[0]?.name||'لم يتم اختيار صورة';
+$('#copyAIPrompt').onclick=async()=>{const extra=$('#aiPrompt').value.trim();const prompt=`أنت مساعد متخصص في استخراج وتنظيم المفردات اللغوية. ${extra||'استخرج الكلمات من الصورة أو الملف المرفق.'}\nأريد النتيجة في جدول من عمودين فقط: العمود الأول بالعربية، والعمود الثاني بالإنجليزية. اجعل كل كلمة عربية أمام ترجمتها الإنجليزية في نفس الصف. لا تضف شروحات أو أعمدة إضافية، واحذف التكرار، وحافظ على ترتيب الكلمات كما ظهرت. اجعل الجدول جاهزًا للنسخ إلى Excel.`;try{await navigator.clipboard.writeText(prompt);toast('تم نسخ برومبت AI. أرفق الصورة في أداة الذكاء الاصطناعي.')}catch(e){const ta=document.createElement('textarea');ta.value=prompt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('تم نسخ البرومبت')}};
 /* PWA */
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;if(!standalone())$('#dInst').hidden=false});
