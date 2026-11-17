@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>حفظني الكلمات — Save My Words</title>
 <meta name="description" content="موقع ذكي لتعلم وحفظ الكلمات في جميع اللغات">
 <meta name="theme-color" content="#070a1c">
@@ -174,7 +174,7 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
 .inlineX{vertical-align:middle;margin-inline-end:8px}
 .screenHead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}.screenHead h2{margin:0;font-size:clamp(1.2rem,3vw,2rem)}
 .addScreen .addc{margin:0 auto;max-width:900px}.addScreen .stats{justify-content:center}
-.toolScreen{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px}
+.toolScreen{flex-direction:column;align-items:center;justify-content:flex-start;gap:12px}.toolScreen.on{display:flex}
 .toolCard{width:min(760px,100%);padding:clamp(14px,3vw,26px);display:grid;gap:14px}
 .excelCols{display:grid;grid-template-columns:1fr 1fr;gap:10px}.excelCols div{padding:14px 8px;text-align:center;border:1px solid var(--bd);border-radius:14px;background:var(--inb);font-weight:800}
 .excelChoose{display:inline-flex;justify-content:center;align-items:center;text-align:center}
@@ -183,6 +183,29 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
 @media(max-width:380px){.dashboard{gap:6px}.dashboard .key{font-size:.72rem}.dashboard .key .ic{font-size:1.2rem}.dashboard .key small{font-size:.5rem}.screenHead{gap:7px}.screenHead .btn{padding:8px 11px}}
 @media(max-height:650px){header{padding-block:4px}.brand svg{width:32px;height:26px}.dashHero{padding:0 0 4px}.dashHero h1{font-size:1.35rem}.dashHero p{margin-top:2px}.dashboard .key{padding:4px}.dashboard .key .ic{font-size:1.25rem}}
 
+
+/* v2: strict no-scroll layout */
+footer,.fl,.scene{display:none!important}
+header{padding-block:6px}
+.screen,.screen.on,#library.screen.on,#settings.screen.on{overflow:hidden}
+.fitw{width:100%}
+#home.screen.on{display:flex}
+.dashboard{flex:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(10px,2.6vmin,24px);padding:clamp(8px,2vmin,20px)}
+@media(min-aspect-ratio:8/5){.dashboard{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:minmax(0,1fr)}}
+.dashboard .key{border-radius:clamp(16px,3.5vmin,32px);gap:clamp(4px,1.5vmin,14px);text-align:center}
+.dashboard .key .ic{font-size:clamp(2.2rem,12vmin,6rem)}
+.dashboard .key span:nth-child(2){font-size:clamp(1.05rem,4.2vmin,2.1rem)}
+#library.screen.on,#ai.screen.on{display:flex;flex-direction:column;gap:8px}
+.pbox{flex:1;min-height:0;overflow:hidden}
+.pg{flex:none;min-height:46px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.pg .btn{padding:7px 16px;font-size:.95rem;border-radius:12px;box-shadow:0 3px 0 var(--d)}.pg span{font-weight:800}
+.wr{margin-bottom:8px;padding:8px 14px}
+.aiOut{flex:1;min-height:0;display:flex;flex-direction:column;padding:12px 14px}
+.aiRow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;margin-bottom:8px;border-radius:16px;background:var(--inb);border:1px solid var(--bd)}
+.aiRow b{font-size:1.15rem}.aiBar{flex:none;padding:4px 6px}.aiBar .btn{padding:9px 18px;border-radius:14px;box-shadow:0 4px 0 var(--d);white-space:nowrap}
+.dr{overflow:hidden}.devc{margin-top:auto;font-size:.8rem;color:var(--mu);text-align:center}
+@media(max-height:560px){.dr{display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:8px;padding:10px}.dh,.devc{grid-column:1/-1}.di{padding:8px;font-size:.9rem}.dic{width:34px;height:34px}}
+@media(min-width:800px){#setDyn{display:grid;grid-template-columns:1fr 1fr;gap:14px}#setDyn .sg{margin:0}}
 </style>
 </head>
 <body>
@@ -203,18 +226,11 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
 
 <main>
  <section id="home" class="screen on">
-  <div class="scene scL" aria-hidden="true"><div class="book"><b></b><b></b></div></div>
-  <div class="scene scR" aria-hidden="true"><div class="cube" id="c1"></div><div class="cube" id="c2"></div></div>
-  <div class="hero dashHero"><h1 data-i="hero"></h1><p data-i="heroSub"></p></div>
   <div class="keys dashboard" id="dashboard">
-   <button class="key" data-go="add"><span class="ic">✍️</span><span>كلمات جديدة</span><small>إضافة كلمة أو مجموعة</small></button>
-   <button class="key" data-go="library"><span class="ic">📚</span><span>مكتبتي</span><small>الكلمات المحفوظة</small></button>
-   <button class="key" data-start="review"><span class="ic">🔄</span><span>مراجعة الكلمات</span><small>اختبر حفظك</small></button>
-   <button class="key" data-start="dictate"><span class="ic">🎧</span><span>اسمع واملّي</span><small>تدريب الاستماع</small></button>
-   <button class="key" data-start="letters"><span class="ic">🧩</span><span>تحدي الحروف</span><small>لعبة الكلمات</small></button>
-   <button class="key excelTile" data-go="excel"><span class="ic excelLogo">X</span><span>Excel</span><small>استيراد كلمات من ملف</small></button>
-   <button class="key aiTile" data-go="ai"><span class="ic">🤖</span><span>مساعد AI</span><small>نسخ برومبت جاهز</small></button>
-   <button class="key" data-go="settings"><span class="ic">⚙️</span><span>الإعدادات</span><small>الصوت والتخصيص</small></button>
+   <button class="key" data-start="review"><span class="ic">📖</span><span>مراجعة الكلام</span></button>
+   <button class="key" data-start="letters"><span class="ic">🔤</span><span>تحديات الحروف</span></button>
+   <button class="key" data-go="ai"><span class="ic">🤖</span><span>مساعدة بالـ AI</span></button>
+   <button class="key" data-start="dictate"><span class="ic">🎧</span><span>استمع واملأ</span></button>
   </div>
  </section>
 
@@ -238,6 +254,7 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
   <div class="gl toolCard">
    <p class="lbl">ارفع ملف Excel يحتوي على عمودين: العربي ثم الإنجليزي (أو الكلمة ثم معناها).</p>
    <div class="excelCols"><div>🇪🇬 العمود الأول: العربي</div><div>🇬🇧 العمود الثاني: English</div></div>
+   <div id="xlc" class="chips" style="justify-content:center"></div>
    <label class="btn excelChoose" for="excelFile">📊 اختيار ملف Excel</label>
    <input id="excelFile" type="file" accept=".xlsx,.xls,.csv,.tsv" hidden>
    <p class="mu" id="excelStatus">يدعم XLSX وXLS وCSV وTSV. سيتم تخطي الصفوف الفارغة والمكررة.</p>
@@ -245,21 +262,16 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
   </div>
  </section>
 
- <section id="ai" class="screen toolScreen">
-  <div class="screenHead"><button class="btn ghost" data-go="home">← الرئيسية</button><h2>🤖 مساعد AI</h2></div>
-  <div class="gl toolCard">
-   <label class="lbl" for="aiPrompt">اكتب طلبك للذكاء الاصطناعي</label>
-   <textarea id="aiPrompt" rows="5" placeholder="مثال: استخرج الكلمات من الصورة وضع العربي في عمود والإنجليزي في العمود المقابل..."></textarea>
-   <label class="btn ghost" for="aiImage">🖼️ اختيار صورة (اختياري)</label><input id="aiImage" type="file" accept="image/*" hidden>
-   <p class="mu" id="aiImageName">لم يتم اختيار صورة</p>
-   <button class="btn" id="copyAIPrompt">📋 نسخ طلب AI</button>
-   <p class="mu">بعد النسخ، افتح أداة الذكاء الاصطناعي والصق الطلب وأرفق الصورة المختارة يدويًا.</p>
-  </div>
+ <section id="ai" class="screen">
+  <div class="screenHead"><button class="btn ghost" data-go="home">← الرئيسية</button><h2>🤖 مساعدة بالـ AI</h2></div>
+  <div class="gl aiOut"><div class="pbox" id="aiBox"></div></div>
+  <div class="pg" id="aiPg"></div>
+  <div class="in aiBar gl"><input id="aiQ" dir="auto" autocomplete="off" placeholder="اسأل: معنى كلمة، ازاي أحفظها، أمثلة، ترجمة، أو اكتب كذا كلمة"><button class="btn" id="aiGo">إرسال</button></div>
  </section>
 
  <section id="library" class="screen">  <h2 data-i="libT"></h2>
   <div class="gl" style="padding:16px;margin-bottom:16px"><div class="in"><span>🔎</span><input id="q" dir="auto" data-ph="search"></div><div id="lf" class="chips" style="margin-top:12px"></div></div>
-  <div id="libList"></div>
+  <div id="libList" class="pbox"></div><div id="libPg" class="pg"></div>
  </section>
 
  <section id="settings" class="screen">
@@ -296,9 +308,11 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
  <button class="di hot" id="dNew"><span class="dic">＋</span><span data-i="dNew"></span></button>
  <button class="di" data-go="home"><span class="dic">🏠</span><span data-i="dHome"></span></button>
  <button class="di" data-go="library"><span class="dic">📚</span><span data-i="dLib"></span></button>
+ <button class="di" data-go="excel"><span class="dic">📊</span><span>استيراد Excel</span></button>
  <button class="di" data-go="settings"><span class="dic">⚙️</span><span data-i="dSet"></span></button>
  <button class="di" id="dInst" hidden><span class="dic">⬇️</span><span data-i="dInst"></span></button>
  <button class="di" id="dLang"><span class="dic">🌐</span><span data-i="dLang"></span></button>
+<div class="devc"><span data-i="dev"></span></div>
 </aside>
 
 <div class="md" id="md" hidden><div class="gl mc">
@@ -309,7 +323,6 @@ main{flex:1;height:auto;min-height:0;padding:clamp(8px,1.5vw,18px);overflow:hidd
 </div></div>
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const LS={g(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -321,8 +334,8 @@ const RNG={rep:[1,6],every:[1,10],size:[3,50],rate:[.5,1.4]};
 let words=LS.g('sw_words',[]),cfg={...DEF,...LS.g('sw_cfg',{})},ui=LS.g('sw_ui','ar'),theme=LS.g('sw_theme','dark'),lang=LS.g('sw_lang','fr'),P=null,bulk=false,libL='all',dp=null,voices=[];
 if(!Array.isArray(words))words=[];if(!LGm[lang])lang='fr';
 const save=()=>LS.s('sw_words',words),saveCfg=()=>LS.s('sw_cfg',cfg);
-const I={ar:{title:'حفظني الكلمات — Save My Words',brand:'حفظني الكلمات',tag:'تعلّم ... احفظ ... تذكّر دائمًا',home:'الصفحة الرئيسية',menu:'القائمة',close:'إغلاق',theme:'تبديل الوضع الداكن والفاتح',listen:'استمع للنطق',hero:'احفظ كلماتك بطريقتك',heroSub:'موقع ذكي لتعلم وحفظ الكلمات في جميع اللغات',lblLang:'اللغة اللي بتتعلمها',lblWord:'الكلمة باللغة اللي بتتعلمها',lblMean:'المعنى بالعربي',phW:'مثال: magnifique',phM:'مثال: رائع',add:'إضافة الكلمة',addAll:'إضافة الكل',tr:'ترجمة تلقائية',bulkOn:'إضافة مجموعة كلمات',single:'إضافة كلمة واحدة',lblBulk:'اكتب كل كلمة في سطر: الكلمة | معناها. لو سبت المعنى فاضي هيترجم تلقائي',phB:'magnifique | رائع\nbonjour | صباح الخير\nmerci',sAll:'كلمة',sMas:'متقنة',sLrn:'قيد التعلم',kSet:'الإعدادات',kLib:'مكتبتي',kDic:'اسمع واملّي',kRev:'راجع الكلمات',kLet:'تحدي الحروف',ready:'جاهز للاستخدام',off:'بدون إنترنت — الترجمة التلقائية غير متاحة',dev:'تطوير: حازم عمر محمد عبد الرحيم',rights:'© 2026 حفظني الكلمات — جميع الحقوق محفوظة',dNew:'جلسة كلمات جديدة',dHome:'الصفحة الرئيسية',dLib:'مكتبتي والكلمات المحفوظة',dSet:'الإعدادات والصوت',dInst:'تثبيت التطبيق',dLang:'English',libT:'مكتبتي',search:'ابحث في كلماتك…',all:'الكل',empty:'مفيش كلمات هنا لسه. أضف أول كلمة من الصفحة الرئيسية.',edit:'تعديل الكلمة',save:'حفظ',cancel:'إلغاء',del:'حذف',deleted:'اتحذفت الكلمة',undo:'تراجع',saved:'اتحفظ التعديل',setT:'الإعدادات والصوت',hLearn:'نظام التكرار والمراجعة',rep:'عدد مرات تكرار كل كلمة',every:'كلمات جديدة قبل مراجعة كلمة قديمة',size:'عدد الكلمات الجديدة في الجلسة',order:'ترتيب الكلمات',o_seq:'بالترتيب',o_rand:'عشوائي',o_hard:'الأصعب أولًا',mix:'مراجعة كلمات سابقة وسط الجديدة',retry:'تكرار الكلمات اللي بتغلط فيها',hVoice:'الصوت',vAuto:'تلقائي',rate:'سرعة النطق',auto:'تشغيل الصوت تلقائيًا',test:'🔊 جرّب الصوت',testTxt:'أهلًا بك في حفظني الكلمات',noVoice:'مفيش صوت عربي على جهازك. الأصوات بتختلف حسب الجهاز والمتصفح.',hData:'النسخة الاحتياطية والبيانات',exp:'تصدير نسخة احتياطية',imp:'استيراد نسخة',reset:'مسح كل البيانات',confirmReset:'هتمسح كل الكلمات والإعدادات. متأكد؟',m_review:'مراجعة الكلمات',m_dictate:'اسمع واملّي',m_letters:'تحدي الحروف',oldTag:'مراجعة كلمة قديمة',exit:'✕ خروج',recall:'افتكر الكلمة اللي معناها:',show:'أظهر الكلمة',again:'محتاج أراجعها',gotit:'حفظتها',hear:'اسمع المعنى واكتب الكلمة',hearHint:'الكلمة مخفية لحد ما تجاوب',peek:'👁 اعرض المعنى',fill:'اكتب الكلمة كاملة بحروفها',phAns:'اكتب الكلمة هنا',check:'تحقق',skip:'تخطي',next:'التالي',retry2:'جرّب تاني',right:'صح! برافو',rightAcc:'صح، بس انتبه للحروف المميزة',wrong:'مش صح',yours:'إجابتك:',typeFirst:'اكتب إجابتك الأول',resT:'خلصت الجلسة',score:'{a} إجابة صح من {b} محاولة',playAgain:'جلسة تانية',okAdd:'اتضافت الكلمة ✓',dup:'الكلمة دي موجودة بالفعل',need2:'اكتب الكلمة والمعنى الأول',needW:'اكتب الكلمة الأول عشان أترجمها',trying:'بترجم…',trFail:'الترجمة مش متاحة دلوقتي. اتأكد من الإنترنت أو اكتب المعنى بنفسك',bulkDone:'اتضاف {n} كلمة',noWords:'ضيف كلمات {l} الأول',noTTS:'المتصفح ده مش بيدعم النطق',impOk:'اتستورد {n} كلمة',impBad:'ملف النسخة الاحتياطية مش سليم',resetOk:'اتمسحت كل البيانات'},
-en:{title:'Save My Words — حفظني الكلمات',brand:'Save My Words',tag:'Learn … Memorize … Remember always',home:'Home',menu:'Menu',close:'Close',theme:'Toggle dark / light mode',listen:'Hear pronunciation',hero:'Memorize words your way',heroSub:'A smart site to learn and memorize words in any language',lblLang:'Language you are learning',lblWord:'Word in the language you are learning',lblMean:'Meaning in Arabic',phW:'e.g. magnifique',phM:'e.g. رائع',add:'Add word',addAll:'Add all',tr:'Auto-translate',bulkOn:'Add many words',single:'Add one word',lblBulk:'One word per line: word | meaning. Leave the meaning empty to auto-translate',phB:'magnifique | رائع\nbonjour | صباح الخير\nmerci',sAll:'words',sMas:'mastered',sLrn:'learning',kSet:'Settings',kLib:'My library',kDic:'Listen & write',kRev:'Review words',kLet:'Letter challenge',ready:'Ready to use',off:'Offline — auto-translate unavailable',dev:'Developed by: Hazem Omar Mohamed Abdel Rahim',rights:'© 2026 Save My Words — All rights reserved',dNew:'New word session',dHome:'Home',dLib:'My library & saved words',dSet:'Settings & voice',dInst:'Install app',dLang:'العربية',libT:'My library',search:'Search your words…',all:'All',empty:'No words here yet. Add your first word from the home page.',edit:'Edit word',save:'Save',cancel:'Cancel',del:'Delete',deleted:'Word deleted',undo:'Undo',saved:'Changes saved',setT:'Settings & voice',hLearn:'Repetition & review',rep:'Repeats per word',every:'New words before reviewing an old one',size:'New words per session',order:'Word order',o_seq:'In order',o_rand:'Random',o_hard:'Hardest first',mix:'Mix old words into new ones',retry:'Repeat words you get wrong',hVoice:'Voice',vAuto:'Auto',rate:'Speech speed',auto:'Play audio automatically',test:'🔊 Test voice',testTxt:'أهلًا بك في حفظني الكلمات',noVoice:'No Arabic voice found on this device. Voices vary by device and browser.',hData:'Backup & data',exp:'Export backup',imp:'Import backup',reset:'Erase all data',confirmReset:'This erases all words and settings. Sure?',m_review:'Review words',m_dictate:'Listen & write',m_letters:'Letter challenge',oldTag:'old word review',exit:'✕ Exit',recall:'Recall the word that means:',show:'Show the word',again:'Need more review',gotit:'Got it',hear:'Listen to the meaning and write the word',hearHint:'The word stays hidden until you answer',peek:'👁 Show meaning',fill:'Type the complete word',phAns:'Type the word here',check:'Check',skip:'Skip',next:'Next',retry2:'Try again',right:'Correct! Well done',rightAcc:'Correct, but watch the accents',wrong:'Not quite',yours:'Your answer:',typeFirst:'Type your answer first',resT:'Session complete',score:'{a} correct out of {b} attempts',playAgain:'Another session',okAdd:'Word added ✓',dup:'This word already exists',need2:'Enter the word and its meaning first',needW:'Enter a word first so I can translate it',trying:'Translating…',trFail:'Translation unavailable right now. Check your connection or type the meaning yourself',bulkDone:'{n} words added',noWords:'Add some {l} words first',noTTS:'This browser does not support speech',impOk:'{n} words imported',impBad:'Invalid backup file',resetOk:'All data erased'}};
+const I={ar:{title:'حفظني الكلمات — Save My Words',brand:'حفظني الكلمات',tag:'تعلّم ... احفظ ... تذكّر دائمًا',home:'الصفحة الرئيسية',menu:'القائمة',close:'إغلاق',theme:'تبديل الوضع الداكن والفاتح',listen:'استمع للنطق',hero:'احفظ كلماتك بطريقتك',heroSub:'موقع ذكي لتعلم وحفظ الكلمات في جميع اللغات',lblLang:'اللغة اللي بتتعلمها',lblWord:'الكلمة باللغة اللي بتتعلمها',lblMean:'المعنى بالعربي',phW:'مثال: magnifique',phM:'مثال: رائع',add:'إضافة الكلمة',addAll:'إضافة الكل',tr:'ترجمة تلقائية',bulkOn:'إضافة مجموعة كلمات',single:'إضافة كلمة واحدة',lblBulk:'اكتب كل كلمة في سطر: الكلمة | معناها. لو سبت المعنى فاضي هيترجم تلقائي',phB:'magnifique | رائع\nbonjour | صباح الخير\nmerci',sAll:'كلمة',sMas:'متقنة',sLrn:'قيد التعلم',kSet:'الإعدادات',kLib:'مكتبتي',kDic:'اسمع واملّي',kRev:'راجع الكلمات',kLet:'تحدي الحروف',ready:'جاهز للاستخدام',off:'بدون إنترنت — الترجمة التلقائية غير متاحة',dev:'تطوير: حازم عمر محمد عبد الرحيم',rights:'© 2026 حفظني الكلمات — جميع الحقوق محفوظة',dNew:'جلسة كلمات جديدة',dHome:'الصفحة الرئيسية',dLib:'مكتبتي والكلمات المحفوظة',dSet:'الإعدادات والصوت',dInst:'تثبيت التطبيق',dLang:'English',libT:'مكتبتي',search:'ابحث في كلماتك…',all:'الكل',empty:'مفيش كلمات هنا لسه. أضف أول كلمة من الصفحة الرئيسية.',edit:'تعديل الكلمة',save:'حفظ',cancel:'إلغاء',del:'حذف',deleted:'اتحذفت الكلمة',undo:'تراجع',saved:'اتحفظ التعديل',setT:'الإعدادات والصوت',hLearn:'نظام التكرار والمراجعة',rep:'عدد مرات تكرار كل كلمة',every:'كلمات جديدة قبل مراجعة كلمة قديمة',size:'عدد الكلمات الجديدة في الجلسة',order:'ترتيب الكلمات',o_seq:'بالترتيب',o_rand:'عشوائي',o_hard:'الأصعب أولًا',mix:'مراجعة كلمات سابقة وسط الجديدة',retry:'تكرار الكلمات اللي بتغلط فيها',hVoice:'الصوت',vAuto:'تلقائي',rate:'سرعة النطق',auto:'تشغيل الصوت تلقائيًا',test:'🔊 جرّب الصوت',testTxt:'أهلًا بك في حفظني الكلمات',noVoice:'مفيش صوت عربي على جهازك. الأصوات بتختلف حسب الجهاز والمتصفح.',hData:'النسخة الاحتياطية والبيانات',exp:'تصدير نسخة احتياطية',imp:'استيراد نسخة',reset:'مسح كل البيانات',confirmReset:'هتمسح كل الكلمات والإعدادات. متأكد؟',m_review:'مراجعة الكلمات',m_dictate:'اسمع واملّي',m_letters:'تحدي الحروف',oldTag:'مراجعة كلمة قديمة',exit:'✕ خروج',recall:'افتكر الكلمة اللي معناها:',show:'أظهر الكلمة',again:'محتاج أراجعها',gotit:'حفظتها',hear:'اسمع المعنى واكتب الكلمة',hearHint:'الكلمة مخفية لحد ما تجاوب',peek:'👁 اعرض المعنى',fill:'اكتب الكلمة كاملة بحروفها',phAns:'اكتب الكلمة هنا',check:'تحقق',skip:'تخطي',next:'التالي',prev:'السابق',retry2:'جرّب تاني',right:'صح! برافو',rightAcc:'صح، بس انتبه للحروف المميزة',wrong:'مش صح',yours:'إجابتك:',typeFirst:'اكتب إجابتك الأول',resT:'خلصت الجلسة',score:'{a} إجابة صح من {b} محاولة',playAgain:'جلسة تانية',okAdd:'اتضافت الكلمة ✓',dup:'الكلمة دي موجودة بالفعل',need2:'اكتب الكلمة والمعنى الأول',needW:'اكتب الكلمة الأول عشان أترجمها',trying:'بترجم…',trFail:'الترجمة مش متاحة دلوقتي. اتأكد من الإنترنت أو اكتب المعنى بنفسك',bulkDone:'اتضاف {n} كلمة',noWords:'ضيف كلمات {l} الأول',noTTS:'المتصفح ده مش بيدعم النطق',impOk:'اتستورد {n} كلمة',impBad:'ملف النسخة الاحتياطية مش سليم',resetOk:'اتمسحت كل البيانات'},
+en:{title:'Save My Words — حفظني الكلمات',brand:'Save My Words',tag:'Learn … Memorize … Remember always',home:'Home',menu:'Menu',close:'Close',theme:'Toggle dark / light mode',listen:'Hear pronunciation',hero:'Memorize words your way',heroSub:'A smart site to learn and memorize words in any language',lblLang:'Language you are learning',lblWord:'Word in the language you are learning',lblMean:'Meaning in Arabic',phW:'e.g. magnifique',phM:'e.g. رائع',add:'Add word',addAll:'Add all',tr:'Auto-translate',bulkOn:'Add many words',single:'Add one word',lblBulk:'One word per line: word | meaning. Leave the meaning empty to auto-translate',phB:'magnifique | رائع\nbonjour | صباح الخير\nmerci',sAll:'words',sMas:'mastered',sLrn:'learning',kSet:'Settings',kLib:'My library',kDic:'Listen & write',kRev:'Review words',kLet:'Letter challenge',ready:'Ready to use',off:'Offline — auto-translate unavailable',dev:'Developed by: Hazem Omar Mohamed Abdel Rahim',rights:'© 2026 Save My Words — All rights reserved',dNew:'New word session',dHome:'Home',dLib:'My library & saved words',dSet:'Settings & voice',dInst:'Install app',dLang:'العربية',libT:'My library',search:'Search your words…',all:'All',empty:'No words here yet. Add your first word from the home page.',edit:'Edit word',save:'Save',cancel:'Cancel',del:'Delete',deleted:'Word deleted',undo:'Undo',saved:'Changes saved',setT:'Settings & voice',hLearn:'Repetition & review',rep:'Repeats per word',every:'New words before reviewing an old one',size:'New words per session',order:'Word order',o_seq:'In order',o_rand:'Random',o_hard:'Hardest first',mix:'Mix old words into new ones',retry:'Repeat words you get wrong',hVoice:'Voice',vAuto:'Auto',rate:'Speech speed',auto:'Play audio automatically',test:'🔊 Test voice',testTxt:'أهلًا بك في حفظني الكلمات',noVoice:'No Arabic voice found on this device. Voices vary by device and browser.',hData:'Backup & data',exp:'Export backup',imp:'Import backup',reset:'Erase all data',confirmReset:'This erases all words and settings. Sure?',m_review:'Review words',m_dictate:'Listen & write',m_letters:'Letter challenge',oldTag:'old word review',exit:'✕ Exit',recall:'Recall the word that means:',show:'Show the word',again:'Need more review',gotit:'Got it',hear:'Listen to the meaning and write the word',hearHint:'The word stays hidden until you answer',peek:'👁 Show meaning',fill:'Type the complete word',phAns:'Type the word here',check:'Check',skip:'Skip',next:'Next',prev:'Previous',retry2:'Try again',right:'Correct! Well done',rightAcc:'Correct, but watch the accents',wrong:'Not quite',yours:'Your answer:',typeFirst:'Type your answer first',resT:'Session complete',score:'{a} correct out of {b} attempts',playAgain:'Another session',okAdd:'Word added ✓',dup:'This word already exists',need2:'Enter the word and its meaning first',needW:'Enter a word first so I can translate it',trying:'Translating…',trFail:'Translation unavailable right now. Check your connection or type the meaning yourself',bulkDone:'{n} words added',noWords:'Add some {l} words first',noTTS:'This browser does not support speech',impOk:'{n} words imported',impBad:'Invalid backup file',resetOk:'All data erased'}};
 const t=(k,v)=>String(I[ui][k]??I.ar[k]??k).replace(/\{(\w+)\}/g,(_,n)=>v&&v[n]!=null?v[n]:'');
 const ln=l=>LGm[l][ui==='ar'?3:4];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -338,7 +351,7 @@ const arV=()=>voices.filter(v=>/^ar/i.test(v.lang));
 function pick(l){const c=voices.filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(l));if(l==='ar')return c.find(v=>v.name===cfg.voice)||c.find(v=>FEM.test(v.name))||c.find(v=>/ar-eg/i.test(v.lang))||c[0];return c.find(v=>FEM.test(v.name))||c[0]}
 function speak(text,l){if(!hasTTS){toast(t('noTTS'));return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text),v=pick(l);if(v)u.voice=v;u.lang=v?v.lang:LGm[l][2];u.rate=cfg.rate;speechSynthesis.speak(u)}
 /* ---------- translate ---------- */
-async function tr(text,from){const to=from==='ar'?'en':'ar',c=new AbortController(),tm=setTimeout(()=>c.abort(),9000);try{const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+(from==='zh'?'zh-CN':from)+'|'+to,{signal:c.signal});const j=await r.json(),o=j&&j.responseData&&j.responseData.translatedText;if(j.responseStatus!=200||!o)throw 0;return dec(o)}finally{clearTimeout(tm)}}
+async function tr(text,from,to0){const to=to0||(from==='ar'?'en':'ar'),c=new AbortController(),tm=setTimeout(()=>c.abort(),9000);try{const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+(from==='zh'?'zh-CN':from)+'|'+to,{signal:c.signal});const j=await r.json(),o=j&&j.responseData&&j.responseData.translatedText;if(j.responseStatus!=200||!o)throw 0;return dec(o)}finally{clearTimeout(tm)}}
 async function doTr(wEl,mEl,btn){const w=wEl.value.trim();if(!w){toast(t('needW'));wEl.focus();return}btn.disabled=true;toast(t('trying'));try{mEl.value=await tr(w,editL||lang);toast(t('okAdd').replace(' ✓',' ✓'));$('#toast').classList.remove('on')}catch(e){toast(t('trFail'))}btn.disabled=false}
 /* ---------- words ---------- */
 function add(w,m,l=lang){w=w.trim();m=m.trim();if(!w||!m)return 0;if(words.some(x=>x.l===l&&lc(x.w)===lc(w)&&lc(x.m)===lc(m)))return 2;words.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),l,w,m,lv:0,x:0,t:Date.now()});return 1}
@@ -347,13 +360,13 @@ let editId=null,editL=null;
 function openEdit(id){const w=words.find(x=>x.id===id);if(!w)return;editId=id;editL=w.l;$('#eW').value=w.w;$('#eM').value=w.m;$('#md').hidden=false;$('#eW').focus()}
 function closeEdit(){$('#md').hidden=true;editId=editL=null}
 /* ---------- render ---------- */
-function renderChips(){$('#lc').innerHTML=LG.map(l=>`<button class="chip${l[0]===lang?' on':''}" data-l="${l[0]}"><span>${l[1]}</span>${l[ui==='ar'?3:4]}</button>`).join('')}
+function renderChips(){$('#xlc').innerHTML=$('#lc').innerHTML=LG.map(l=>`<button class="chip${l[0]===lang?' on':''}" data-l="${l[0]}"><span>${l[1]}</span>${l[ui==='ar'?3:4]}</button>`).join('')}
 function renderAdd(){$('#fS').hidden=bulk;$('#fB').hidden=!bulk;$('#bAdd').textContent='＋ '+t(bulk?'addAll':'add');$('#bBulk').textContent=t(bulk?'single':'bulkOn')}
 function renderStats(){const c=words.filter(w=>w.l===lang),m=c.filter(w=>w.lv>=4).length;$('#stats').innerHTML=`<span><b>${c.length}</b>${t('sAll')}</span><span><b>${m}</b>${t('sMas')}</span><span><b>${c.length-m}</b>${t('sLrn')}</span>`}
 function renderLib(){const used=[...new Set(words.map(w=>w.l))];if(libL!=='all'&&!used.includes(libL))libL='all';
  $('#lf').innerHTML=`<button class="chip${libL==='all'?' on':''}" data-f="all">${t('all')}</button>`+used.map(l=>`<button class="chip${libL===l?' on':''}" data-f="${l}"><span>${LGm[l][1]}</span>${ln(l)}</button>`).join('');
  const q=nm($('#q').value||''),L=words.filter(w=>(libL==='all'||w.l===libL)&&(!q||nm(w.w).includes(q)||nm(w.m).includes(q))).sort((a,b)=>b.t-a.t);
- $('#libList').innerHTML=L.length?L.map(w=>`<div class="wr gl" data-id="${w.id}"><div><b dir="auto">${esc(w.w)}</b><small>${LGm[w.l][1]} ${ln(w.l)}</small></div><div class="wm" dir="auto">${esc(w.m)}</div><div class="dots">${[1,2,3,4,5].map(i=>`<i class="${i<=w.lv?'on':''}"></i>`).join('')}</div><div class="wa"><button class="ib" data-a="spk" aria-label="${t('listen')}">🔊</button><button class="ib" data-a="edit" aria-label="${t('edit')}">✏️</button><button class="ib" data-a="del" aria-label="${t('del')}">🗑️</button></div></div>`).join(''):`<div class="empty gl">${t('empty')}</div>`}
+ libS.items=L.length?L.map(w=>`<div class="wr gl" data-id="${w.id}"><div><b dir="auto">${esc(w.w)}</b><small>${LGm[w.l][1]} ${ln(w.l)}</small></div><div class="wm" dir="auto">${esc(w.m)}</div><div class="dots">${[1,2,3,4,5].map(i=>`<i class="${i<=w.lv?'on':''}"></i>`).join('')}</div><div class="wa"><button class="ib" data-a="spk" aria-label="${t('listen')}">🔊</button><button class="ib" data-a="edit" aria-label="${t('edit')}">✏️</button><button class="ib" data-a="del" aria-label="${t('del')}">🗑️</button></div></div>`):[`<div class="empty gl">${t('empty')}</div>`];if($('#library').classList.contains('on'))pageFit($('#libList'),$('#libPg'),libS)}
 function renderSet(){
  const st=(k,v)=>`<div class="sr"><span>${t(k)}</span><div class="st"><button class="ib" data-k="${k}" data-d="-1">−</button><b>${v}</b><button class="ib" data-k="${k}" data-d="1">+</button></div></div>`;
  const tg=k=>`<div class="sr"><span>${t(k)}</span><button class="tg${cfg[k]?' on':''}" data-tg="${k}" role="switch" aria-checked="${!!cfg[k]}"><i></i></button></div>`;
@@ -370,7 +383,7 @@ function stat(){const on=navigator.onLine;$('#dot').classList.toggle('off',!on);
 function go(n){location.hash==='#'+n?route():location.hash=n}
 function route(){let n=location.hash.slice(1)||'home';const el=$('#'+n);if(!el||!el.classList.contains('screen')||(/^(practice|result)$/.test(n)&&!P))n='home';
  $$('.screen').forEach(s=>s.classList.toggle('on',s.id===n));$$('.di[data-go]').forEach(d=>d.classList.toggle('cur',d.dataset.go===n));document.body.classList.remove('open');window.scrollTo(0,0);
- if(n==='library')renderLib();if(n==='settings')renderSet();if(n==='home')renderStats();if(n!=='practice'&&hasTTS)speechSynthesis.cancel()}
+ if(n==='library')renderLib();if(n==='settings')renderSet();if(n==='home')renderStats();if(n==='ai'){if(!aiS.items.length)aiS.items=aiHelp();aiDraw()}if(n!=='practice'&&hasTTS)speechSynthesis.cancel();fitScreen()}
 addEventListener('hashchange',route);
 /* ---------- practice ---------- */
 function buildQueue(){const pool=words.filter(w=>w.l===lang);let nw=pool.filter(w=>w.lv<2),old=pool.filter(w=>w.lv>=2);if(!nw.length){nw=[...pool];old=[]}
@@ -402,8 +415,8 @@ function fin(){const acc=P.tot?Math.round(P.ok/P.tot*100):0;$('#rRing').style.se
 /* ---------- events ---------- */
 document.addEventListener('click',e=>{const b=e.target.closest('button,[data-go]');if(!b)return;const d=b.dataset;
  if(d.go)go(d.go);else if(d.start)start(d.start);
- if(b.parentElement&&b.parentElement.id==='lc'&&d.l){lang=d.l;LS.s('sw_lang',lang);renderChips();renderStats()}
- if(b.parentElement&&b.parentElement.id==='lf'){libL=d.f;renderLib()}});
+ if(b.parentElement&&/^(lc|xlc)$/.test(b.parentElement.id)&&d.l){lang=d.l;LS.s('sw_lang',lang);renderChips();renderStats()}
+ if(b.parentElement&&b.parentElement.id==='lf'){libL=d.f;libS.p=0;renderLib()}});
 $('#bAdd').onclick=async()=>{
  if(!bulk){const r=add($('#fw').value,$('#fm').value);if(r===1){save();$('#fw').value=$('#fm').value='';$('#fw').focus();toast(t('okAdd'));renderAll()}else toast(t(r===2?'dup':'need2'));return}
  const lines=$('#bkIn').value.split('\n').map(s=>s.trim()).filter(Boolean);if(!lines.length){toast(t('need2'));return}
@@ -417,7 +430,7 @@ $('#bTr').onclick=()=>{editL=null;doTr($('#fw'),$('#fm'),$('#bTr'))};
 $('#eTr').onclick=()=>doTr($('#eW'),$('#eM'),$('#eTr'));
 $('#eSave').onclick=()=>{const w=words.find(x=>x.id===editId),a=$('#eW').value.trim(),m=$('#eM').value.trim();if(!w)return;if(!a||!m){toast(t('need2'));return}w.w=a;w.m=m;save();closeEdit();renderAll();toast(t('saved'))};
 $('#eCancel').onclick=closeEdit;$('#md').onclick=e=>{if(e.target.id==='md')closeEdit()};
-$('#q').oninput=renderLib;
+$('#q').oninput=()=>{libS.p=0;renderLib()};
 $('#libList').onclick=e=>{const b=e.target.closest('button[data-a]');if(!b)return;const id=b.closest('.wr').dataset.id,w=words.find(x=>x.id===id);if(!w)return;const a=b.dataset.a;a==='spk'?speak(w.w,w.l):a==='edit'?openEdit(id):del(id)};
 $('#setDyn').onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
  if(d.act==='test'){speak(t('testTxt'),'ar');return}
@@ -440,6 +453,7 @@ addEventListener('online',stat);addEventListener('offline',stat);
 document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const el=e.target.closest('.key,.btn,.speak3d');if(!el)return;const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--rx',(-y*14).toFixed(1)+'deg');el.style.setProperty('--ry',(x*14).toFixed(1)+'deg')});
 document.addEventListener('pointerout',e=>{const el=e.target.closest&&e.target.closest('.key,.btn,.speak3d');if(el&&!el.contains(e.relatedTarget)){el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')}});
 /* Excel import + AI prompt tools */
+const loadX=()=>window.XLSX?Promise.resolve():new Promise((ok,no)=>{const e=document.createElement('script');e.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';e.onload=ok;e.onerror=()=>no(new Error('تعذر تحميل قارئ Excel. اتصل بالإنترنت ثم أعد المحاولة.'));document.head.append(e)});
 const excelFile=$('#excelFile');
 if(excelFile)excelFile.addEventListener('change',async e=>{
  const file=e.target.files&&e.target.files[0];if(!file)return;
@@ -451,12 +465,11 @@ if(excelFile)excelFile.addEventListener('change',async e=>{
    const txt=await file.text();const delim=ext==='tsv'?'\t':(txt.includes(';')&&!txt.includes(',')?';':',');
    rows=txt.replace(/^\uFEFF/,'').split(/\r?\n/).map(line=>line.split(delim).map(v=>v.trim().replace(/^"|"$/g,'')));
   }else{
-   if(!window.XLSX)throw new Error('تعذر تحميل قارئ Excel. اتصل بالإنترنت ثم أعد المحاولة.');
+   await loadX();
    const data=await file.arrayBuffer();const wb=XLSX.read(data,{type:'array'});const ws=wb.Sheets[wb.SheetNames[0]];rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:''});
   }
   let added=0,skipped=0;
-  lang='en';LS.s('sw_lang',lang);renderChips();
-  rows.forEach((r,i)=>{if(!Array.isArray(r)||r.length<2)return;let a=String(r[0]??'').trim(),b=String(r[1]??'').trim();if(!a||!b)return;
+    rows.forEach((r,i)=>{if(!Array.isArray(r)||r.length<2)return;let a=String(r[0]??'').trim(),b=String(r[1]??'').trim();if(!a||!b)return;
    if(i===0&&(/عربي|arabic|كلمة|word/i.test(a)||/english|إنجليزي|انجليزي|معنى/i.test(b))){return;}
    // Import Arabic in the meaning field and English as the vocabulary item.
    const isArabic=x=>/[\u0600-\u06FF]/.test(x);
@@ -468,18 +481,61 @@ if(excelFile)excelFile.addEventListener('change',async e=>{
  e.target.value='';
 });
 $('#excelTemplate').onclick=()=>{const sample='العربي\tEnglish\nتفاحة\tApple\nكتاب\tBook';if(navigator.clipboard?.writeText)navigator.clipboard.writeText(sample).then(()=>toast('تم نسخ نموذج الأعمدة')).catch(()=>toast('تعذر النسخ'));else toast('المتصفح لا يدعم النسخ التلقائي')};
-$('#aiImage').onchange=e=>$('#aiImageName').textContent=e.target.files?.[0]?.name||'لم يتم اختيار صورة';
-$('#copyAIPrompt').onclick=async()=>{const extra=$('#aiPrompt').value.trim();const prompt=`أنت مساعد متخصص في استخراج وتنظيم المفردات اللغوية. ${extra||'استخرج الكلمات من الصورة أو الملف المرفق.'}\nأريد النتيجة في جدول من عمودين فقط: العمود الأول بالعربية، والعمود الثاني بالإنجليزية. اجعل كل كلمة عربية أمام ترجمتها الإنجليزية في نفس الصف. لا تضف شروحات أو أعمدة إضافية، واحذف التكرار، وحافظ على ترتيب الكلمات كما ظهرت. اجعل الجدول جاهزًا للنسخ إلى Excel.`;try{await navigator.clipboard.writeText(prompt);toast('تم نسخ برومبت AI. أرفق الصورة في أداة الذكاء الاصطناعي.')}catch(e){const ta=document.createElement('textarea');ta.value=prompt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('تم نسخ البرومبت')}};
 /* PWA */
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
 addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;if(!standalone())$('#dInst').hidden=false});
 addEventListener('appinstalled',()=>{dp=null;$('#dInst').hidden=true});
 $('#dInst').onclick=async()=>{if(!dp)return;dp.prompt();await dp.userChoice;dp=null;$('#dInst').hidden=true;closeD()};
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-/* decor: floating symbols + 3D cubes */
-['A','B','C','é','ñ','ü','ç','ß','あ','한','📖','🎧','✦','✎'].forEach((s,i)=>{const d=document.createElement('span');d.className='fl';d.textContent=s;d.style.cssText=`left:${(i*37+8)%94}%;top:${(i*53+6)%88}%;font-size:${22+(i*13)%38}px;animation-delay:-${i*1.7}s;animation-duration:${12+i%5*3}s`;$('#bg').append(d)});
-function cube(e,z,L){const R=['rotateY(0deg)','rotateY(90deg)','rotateY(180deg)','rotateY(-90deg)','rotateX(90deg)','rotateX(-90deg)'];e.style.setProperty('--z',z+'px');e.innerHTML=R.map((r,k)=>`<i style="transform:${r} translateZ(${z/2}px)">${L[k%L.length]}</i>`).join('')}
-cube($('#c1'),76,['A','B','C','D','E','F']);cube($('#c2'),52,['é','ç','ñ','ü','ß','à']);
+
+/* ---------- no-scroll engine: paging + auto-fit ---------- */
+const libS={items:[],p:0},aiS={items:[],p:0,act:null};
+function pageFit(box,pg,st){const n=st.items.length;let per=Math.max(1,n);
+ const draw=()=>{const N=Math.max(1,Math.ceil(n/per));st.p=Math.min(Math.max(0,st.p),N-1);box.innerHTML=st.items.slice(st.p*per,st.p*per+per).join('')};
+ const over=()=>{const c=box.lastElementChild;return c&&c.getBoundingClientRect().bottom>box.getBoundingClientRect().bottom+1};
+ if(n){const k=Math.min(n,6);box.innerHTML=st.items.slice(0,k).join('');const h=[...box.children].reduce((a,e)=>a+e.getBoundingClientRect().height+8,0)/k;per=Math.max(1,Math.floor(box.clientHeight/h));draw();while(per>1&&over()){per--;draw()}}else box.innerHTML='';
+ const N=Math.max(1,Math.ceil(n/per));
+ pg.innerHTML=(N>1?`<button class="btn ghost" data-pg="-1" ${st.p<=0?'disabled':''}>${t('prev')}</button><span>${st.p+1} / ${N}</span><button class="btn ghost" data-pg="1" ${st.p>=N-1?'disabled':''}>${t('next')}</button>`:'')+(st.act?`<button class="btn good" data-pa="1">${st.act.l}</button>`:'')}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pg],[data-pa]');if(!b)return;const ai=b.closest('.pg').id==='aiPg',st=ai?aiS:libS;if(b.dataset.pa){st.act&&st.act.fn();return}st.p+=+b.dataset.pg;ai?aiDraw():renderLib()});
+['add','excel','settings','practice','result'].forEach(id=>{const s=$('#'+id),w=document.createElement('div');w.className='fitw';while(s.firstChild)w.append(s.firstChild);s.append(w)});
+let fq;function fitScreen(){cancelAnimationFrame(fq);fq=requestAnimationFrame(()=>{const s=document.querySelector('.screen.on'),w=s&&s.querySelector(':scope>.fitw');if(!w)return;let z=1;w.style.zoom=1;while(w.getBoundingClientRect().height>s.clientHeight-4&&z>.4){z-=.04;w.style.zoom=z.toFixed(2)}})}
+new MutationObserver(fitScreen).observe($('main'),{childList:true,subtree:true,characterData:true});
+addEventListener('resize',()=>{if($('#library').classList.contains('on'))renderLib();aiDraw();fitScreen()});
+/* ---------- AI assistant: knowledge base (offline) + online translation/examples ---------- */
+const STOP=new Set('ما ماذا هو هي ايه إيه اية يعني معنى معني كلمة كلمه الكلمة الكلمه كلمات ازاي إزاي كيف احفظ أحفظ احفظها حفظ طريقة طريقه لي ليا لو سمحت ممكن عايز عاوز أريد اريد اديني هات هاتلي مثال امثلة أمثلة جملة جمل ترجم ترجمة ترجملي دي دى ده دا دول بالعربي بالانجليزي بالإنجليزي في من علي على the word words meaning of what is does mean how to memorize remember translate translation example examples sentence sentences give me please can you in for a an'.split(' '));
+const AIK={ex:/مثال|امثل|أمثل|جمل[ةه]|جمل\b|example|sentence/i,how:/احفظ|أحفظ|حفظ|طريق[ةه]|اتذكر|أتذكر|تذكر|memori[sz]|remember|trick/i};
+const tip=h=>`<div class="aiRow pi"><div dir="auto">${h}</div></div>`;
+const row=(a,b,l)=>`<div class="aiRow pi"><div><b dir="auto">${esc(a)}</b><div class="mu" dir="auto" style="margin:2px 0 0">${esc(b)}</div></div><button class="ib" data-sp="${esc(a)}" data-sl="${l}" aria-label="${t('listen')}">🔊</button></div>`;
+const aiHelp=()=>['🔎 <b>معنى كلمة:</b> اكتب مثلًا «معنى magnifique» أو «يعني ايه bonjour»','🧠 <b>طريقة حفظ:</b> «ازاي احفظ merci»','💬 <b>أمثلة:</b> «أمثلة على bonjour» (محتاج إنترنت)','🌐 <b>ترجمة:</b> «ترجم صباح الخير»','📚 <b>كلمات كتير:</b> اكتب كذا كلمة وبينهم فاصلة أو سطر جديد، وأضيفها لمكتبتك مرة واحدة'].map(tip);
+function aiParse(q){const Q=[...q.matchAll(/["“«‘](.+?)["”»’]/g)].map(m=>m[1].trim());let g=Q.length?Q:q.split(/[\n,،;؛|]+/).map(x=>x.split(/\s+/).map(y=>y.replace(/[?؟!.:]+$/,'')).filter(y=>y&&!STOP.has(y.toLowerCase())).join(' ')).filter(Boolean);if(g.length===1&&/كلمات|words|دول/i.test(q)&&g[0].includes(' '))g=g[0].split(' ');return g.slice(0,30)}
+const aiFind=q=>{const n=nm(q);return words.find(w=>w.l===lang&&(nm(w.w)===n||nm(w.m)===n))||words.find(w=>nm(w.w)===n||nm(w.m)===n)};
+const aiDir=q=>{const f=isAr(q)?'ar':lang;return[f,f==='ar'?(lang==='ar'?'en':lang):'ar']};
+const isAr=x=>/[\u0600-\u06FF]/.test(x);
+async function aiLookup(q){const f=aiFind(q);if(f)return{w:f.w,m:f.m,l:f.l,own:1};const[a,b]=aiDir(q),o=await tr(q,a,b);return a==='ar'?{w:o,m:q,l:lang}:{w:q,m:o,l:lang}}
+const aiAdd=rs=>{const nw=rs.filter(r=>!r.own&&!r.x);return nw.length?{l:`＋ أضف ${nw.length>1?nw.length+' كلمات':'الكلمة'} لمكتبتي`,fn:()=>{let n=0;nw.forEach(r=>{if(add(r.w,r.m,r.l)===1)n++});save();renderAll();toast(t('bulkDone',{n}));aiS.act=null;aiDraw()}}:null};
+async function aiEx(q){const own=words.filter(w=>nm(w.w).includes(nm(q))||nm(w.m).includes(nm(q))).slice(0,2).map(w=>row(w.w,w.m,w.l)),[a,b]=aiDir(q),r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(q)+'&langpair='+a+'|'+b),j=await r.json(),seen=new Set(),out=[];
+ (j.matches||[]).forEach(m=>{const x=dec(m.segment||''),y=dec(m.translation||''),k=nm(x);if(x.length>q.length+8&&x.length<140&&k.includes(nm(q))&&!seen.has(k)){seen.add(k);out.push(row(x,y,a))}});
+ const res=own.concat(out.slice(0,6));if(!res.length)throw 0;return res}
+async function aiHow(q){let w=q,m='';if(q){try{const r=await aiLookup(q);w=r.w;m=r.m}catch(e){}}
+ if(!w)return['⏱ كلمات قليلة كل يوم أحسن من كتير مرة واحدة','🔁 راجع الكلمة بعد يوم، ثم 3 أيام، ثم أسبوع، ثم شهر','✍️ اسمعها، قلها بصوت عالي، واكتبها من غير ما تبص','🖼 اربط كل كلمة بصورة أو موقف من حياتك'].map(tip);
+ const V='aeiouyàâäéèêëîïôöùûüœ',sy=(w.match(new RegExp(`[^${V}\\s]*[${V}]+(?:[^${V}\\s]+(?![${V}]))?`,'gi'))||[]);
+ const T=[`🔊 اسمع <b dir="auto">${esc(w)}</b> وكررها 3 مرات بصوت عالي`];
+ if(m)T.push(`🖼 تخيل صورة أو موقف يخلي «${esc(m)}» مرتبط بشكل الكلمة وصوتها`);
+ if(sy.length>1)T.push(`✂️ قسّمها لمقاطع: <b dir="ltr">${esc(sy.join(' · '))}</b>`);
+ T.push('✍️ اكتبها 3 مرات من غير ما تبص، وبعدين قارن','💬 استعملها في جملة من عندك النهارده','🔁 راجعها بعد يوم، ثم 3 أيام، ثم أسبوع');return T.map(tip)}
+function aiSet(items,act){aiS.items=items;aiS.act=act||null;aiS.p=0;aiDraw()}
+function aiDraw(){if($('#ai').classList.contains('on'))pageFit($('#aiBox'),$('#aiPg'),aiS)}
+async function aiAsk(q){q=q.trim();if(!q)return;aiSet([tip('⏳ لحظة…')]);
+ try{const g=aiParse(q),f=g[0]||'';let it,act=null;
+  if(AIK.ex.test(q)){if(!f)throw 'need';it=await aiEx(f)}
+  else if(AIK.how.test(q))it=await aiHow(f);
+  else if(g.length>1){const rs=[];for(const x of g){try{rs.push(await aiLookup(x))}catch(e){rs.push({w:x,m:'—',l:lang,x:1})}}it=rs.map(r=>row(r.w,r.m,r.l));act=aiAdd(rs)}
+  else if(f){const r=await aiLookup(f);it=[row(r.w,r.m,r.l)];act=aiAdd([r])}
+  else it=aiHelp();
+  aiSet(it,act)}
+ catch(e){aiSet([tip(e==='need'?'اكتب الكلمة اللي عايز لها أمثلة.':'مقدرتش أجيب إجابة دلوقتي. الترجمة والأمثلة محتاجين إنترنت، جرّب تاني أو اكتب الكلمة بشكل مختلف.')])}}
+$('#aiGo').onclick=()=>aiAsk($('#aiQ').value);$('#aiQ').onkeydown=e=>{if(e.key==='Enter')aiAsk($('#aiQ').value)};
+$('#aiBox').onclick=e=>{const b=e.target.closest('[data-sp]');if(b)speak(b.dataset.sp,b.dataset.sl)};
 /* init */
 if(hasTTS){loadV();speechSynthesis.onvoiceschanged=()=>{loadV();renderSet()}}
 if(standalone())$('#dInst').hidden=true;
