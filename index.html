@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>حفظني الكلمات — Save My Words</title>
 <meta name="description" content="موقع ذكي لتعلم وحفظ الكلمات في جميع اللغات">
-<meta name="theme-color" content="#000">
+<meta name="theme-color" content="#070a1c">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -207,41 +207,14 @@ header{padding-block:6px}
 @media(max-height:560px){.dr{display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:8px;padding:10px}.dh,.devc{grid-column:1/-1}.di{padding:8px;font-size:.9rem}.dic{width:34px;height:34px}}
 @media(min-width:800px){#setDyn{display:grid;grid-template-columns:1fr 1fr;gap:14px}#setDyn .sg{margin:0}}
 
-/* v3: black & white luxury */
-:root,[data-theme=dark]{--bg:#000;--tx:#f4f4f4;--mu:#9b9b9b;--gl:rgba(255,255,255,.045);--bd:rgba(255,255,255,.2);--inb:rgba(255,255,255,.04);--drb:#0a0a0a;--pu:#fff;--cy:#fff;--gn:#fff;--rd:#fff}
-[data-theme=light]{--bg:#fff;--tx:#000;--mu:#666;--gl:rgba(0,0,0,.04);--bd:rgba(0,0,0,.22);--inb:rgba(0,0,0,.035);--drb:#f4f4f4;--pu:#000;--cy:#000;--gn:#000;--rd:#000}
-.bg{background:radial-gradient(70% 45% at 50% -5%,rgba(255,255,255,.1),transparent 70%),var(--bg)}
-[data-theme=light] .bg{background:radial-gradient(70% 45% at 50% -5%,rgba(0,0,0,.06),transparent 70%),var(--bg)}
-*{text-shadow:none!important}
-h2,.brand b{letter-spacing:.02em}
-.brand svg{filter:grayscale(1) brightness(1.6)}[data-theme=light] .brand svg{filter:grayscale(1) brightness(.2)}
-.emoji,.key .ic,.dic,.ib,.chip,.btn span{filter:grayscale(1)}
-.gl{box-shadow:none;border-radius:20px}
-.btn{background:var(--tx);color:var(--bg);border:1px solid var(--tx);box-shadow:none!important;border-radius:14px;font-weight:800}
-.btn:active{--ty:2px}
-.btn.ghost,.btn.good,.btn.bad{background:transparent;color:var(--tx);border:1px solid var(--bd)}
-.btn.bad{border-style:dashed}
-.btn:hover{filter:none;opacity:.88}
-.ib,.chip{box-shadow:none;border:1px solid var(--bd)}
-.chip.on,.lp button.on{background:var(--tx);color:var(--bg);border-color:var(--tx);box-shadow:none}
-.lp{box-shadow:none}
-.dashboard .key{background:var(--bg)!important;color:var(--tx);border:1px solid var(--bd);box-shadow:none!important;transition:background .2s,color .2s,transform .12s}
-.dashboard .key:hover{background:var(--tx)!important;color:var(--bg);filter:none}
-.dashboard .key:hover .ic{filter:grayscale(1) invert(1)}
-.dashboard .key span:nth-child(2){font-weight:800;letter-spacing:.03em}
-.in:focus-within{border-color:var(--tx);box-shadow:none}
-.pbar i,.dots i.on{background:var(--tx);box-shadow:none}.dots i{background:var(--bd)}
-.ring{background:conic-gradient(var(--tx) calc(var(--p)*1%),var(--bd) 0);box-shadow:none}
-.bx{background:var(--gl);border:1px solid var(--bd);box-shadow:none}.bx.h{border:1.5px dashed var(--tx);box-shadow:none;color:var(--tx)}
-.speak3d{background:var(--tx);color:var(--bg);box-shadow:none}
-.fb.good{background:var(--gl);border:1px solid var(--tx)}.fb.bad{background:transparent;border:1px dashed var(--tx)}
-.tg{background:var(--bd);box-shadow:none}.tg.on{background:var(--tx)}.tg i{background:var(--bg)}.tg.on i{background:var(--bg)}
-.di.hot{background:var(--tx);color:var(--bg)}.di,.di.cur{box-shadow:none}.di.cur{border-color:var(--tx)}
-#toast{box-shadow:none;border-color:var(--tx)}#toast button{background:var(--tx);color:var(--bg)}
-.dot,.dot.off{background:var(--tx);box-shadow:none}
+/* v4: vivid colors on deep dark */
 .dashboard{grid-template-rows:repeat(3,minmax(0,1fr))}
 @media(min-aspect-ratio:8/5){.dashboard{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}}
 .dashboard .key .ic{font-size:clamp(1.8rem,9vmin,4.5rem)}
+.dashboard .key span:nth-child(2){font-weight:900;letter-spacing:.02em;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.key:nth-child(1){--c1:#2563eb;--c2:#22d3ee;--d:#1e3a8a}
+.key:nth-child(5){--c1:#16a34a;--c2:#84cc16;--d:#166534}
+.key:nth-child(6){--c1:#e11d48;--c2:#f97316;--d:#9f1239}
 </style>
 </head>
 <body>
@@ -425,7 +398,7 @@ function renderMisc(){$('#bTheme').textContent=theme==='dark'?'☀️':'🌙';$(
 function renderAll(){renderChips();renderAdd();renderStats();renderLib();renderSet();renderMisc()}
 function applyUI(){const h=document.documentElement;h.lang=ui;h.dir=ui==='ar'?'rtl':'ltr';h.dataset.theme=theme;document.title=t('title');
  $$('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));$$('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));$$('[data-al]').forEach(e=>{e.setAttribute('aria-label',t(e.dataset.al));e.title=t(e.dataset.al)});
- document.querySelector('meta[name=theme-color]').content=theme==='dark'?'#000':'#fff';renderAll()}
+ document.querySelector('meta[name=theme-color]').content=theme==='dark'?'#070a1c':'#eceffd';renderAll()}
 function stat(){const on=navigator.onLine;$('#dot').classList.toggle('off',!on);$('#stT').textContent=t(on?'ready':'off')}
 /* ---------- routing ---------- */
 function go(n){location.hash==='#'+n?route():location.hash=n}
@@ -589,7 +562,39 @@ const AIC=[
 [/(قواعد|جرامر|grammar)/i,['ابدأ بالأفعال الأكتر استخدامًا، وتعلم كل فعل مع جملة كاملة مش لوحده.','اتعلم الكلمة جوه جملة، كده القواعد بتتحفظ لوحدها.']],
 [/(سماع|استماع|listening)/i,['استخدم زرار «استمع واملأ» واكتب اللي بتسمعه.','اسمع الكلمة وبعدين اكتبها من غير ما تشوفها.']]
 ];
-const aiChat=q=>{if(q.length>60||/معنى|ترجم|يعني|meaning|translat|مثال|أمثلة|امثلة/i.test(q))return null;for(const[r,a]of AIC)if(r.test(q))return a==='help'?aiHelp():[tip(R(a))];if(/(كلمة اليوم|word of the day)/i.test(q)){const w=words.length?R(words):null,d=R(DICT);return[tip('🌟 كلمة اليوم:'),w?row(w.w,w.m,w.l):row(d[1],d[2],d[0])]}return null};
+let aiQz=null;
+
+AIC.push(
+[/(برافو|ممتاز|حلو|جميل|عظيم|تحفة|رائع|شاطر|great|awesome|nice)/i,['تسلم! كمّل وانت بتتقدم بسرعة.','ده من ذوقك! يلا نحفظ كلمة جديدة.','شكرًا! الفضل ليك إنك بتراجع.']],
+[/(غبي|وحش|مش فاهم|مش عارف|مفهمتش|ما فهمتش|مش واضح)/i,['آسف لو الرد مكانش واضح. اكتب سؤالك بشكل تاني: مثلًا «معنى كلمة» أو «ازاي احفظ كلمة».','جرّب تكتب الكلمة لوحدها وأنا أجيبلك معناها.','قولي إنت عايز إيه بالظبط: معنى، ترجمة، أمثلة، ولا طريقة حفظ؟']],
+[/^\s*(تمام|اوك|أوك|ok|okay|ماشي|حاضر|طيب|اه|آه|أيوه|ايوه)\s*[!.؟?]*$/i,['تمام! عايز كلمة تانية؟','ماشي. لو عايز تختبر نفسك اكتب «اختبرني».','حلو. أنا موجود لو احتجت حاجة.']],
+[/^\s*(لا|لأ|no|مش عايز|بلاش)\s*[!.؟?]*$/i,['براحتك. لو عايزني قولي.','تمام، مفيش مشكلة.']],
+[/(نكتة|نكته|هزار|joke)/i,['مرة طالب قال للمدرس: أنا نسيت الكلمة. المدرس: طب افتكرها. قال: نسيت إني نسيتها!','واحد حفظ 100 كلمة في ليلة، الصبح افتكر 3 بس، وقال: الحمد لله، 3 أحسن من ولا واحدة.','ليه الكتاب كان حزين؟ لأن كل الناس بتفتحه وبعدين تقفله.']],
+[/(كام الساعة|الساعة كام|what time)/i,[()=>'الساعة دلوقتي '+new Date().toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'})]],
+[/(النهارده ايه|النهاردة ايه|التاريخ|اليوم ايه|what date)/i,[()=>'النهارده '+new Date().toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long',year:'numeric'})]],
+[/(انت ذكي|انت شاطر|انت بتفهم|انت بني ادم|انت روبوت|انت ai)/i,['أنا برنامج مساعد جوه الموقع، بساعدك في الكلمات وبحاول أفهمك بأكتر من صيغة.','أنا مساعد بقاعدة معرفة، مش إنسان، بس شغلي إني أساعدك تحفظ.']],
+[/(مين صنعك|مين عملك|مين المطور|المطور|developer)/i,[()=>t('dev')]],
+[/(بتتكلم عربي|بتفهم عربي|بتتكلم انجليزي|بتفهم انجليزي|do you speak)/i,['أيوه بفهم عربي ومصري وإنجليزي، واكتب بالطريقة اللي تريحك.','أكيد، اكتب بالعربي أو الإنجليزي وأنا أرد عليك.']],
+[/(ازاي اضيف|إزاي أضيف|اضافة كلمة|إضافة كلمة|أضيف كلمة|اضيف كلمة)/i,['من القائمة ☰ اختار «جلسة كلمات جديدة»، اكتب الكلمة ومعناها واضغط إضافة. أو اكتب لي الكلمات هنا وأنا أضيفها.','تقدر تضيف كذا كلمة مرة واحدة هنا في الشات: اكتبهم بينهم فاصلة وهتلاقي زرار «أضف لمكتبتي».']],
+[/(ازاي احذف|إزاي أحذف|مسح كلمة|امسح|حذف كلمة)/i,['افتح «مكتبتي» من القائمة ☰ واضغط 🗑️ جنب الكلمة. وفي زرار تراجع لو غلطت.']],
+[/(فين المكتبة|مكتبتي|المكتبة فين)/i,['المكتبة في القائمة ☰ فوق على الشمال. كل كلماتك هناك وتقدر تبحث وتعدّل.']],
+[/(ازاي اعمل excel|ازاي أعمل excel|ملف اكسل|ملف إكسل|اكسل ازاي|excel)/i,['من زرار Excel: انسخ الطلب، الصقه في أي AI مع صور الكلمات، وبعدين ارفع الملف اللي رجعلك.','الملف عمودين: العربي الأول والإنجليزي التاني، وكل كلمة في صف.']],
+[/(التحديات|تحدي|challenge)/i,['التحديات بتلخبط لك الحروف وتشيل منها حروف بشكل عشوائي، وإنت تكتب الكلمة كاملة. اختار ملف الإكسل وابدأ.','في التحديات الكلمات والنوع بيتغيروا كل مرة، فمفيش حاجة بتتكرر بنفس الترتيب.']],
+[/(مراجعة|راجع|review)/i,['المراجعة بتعرضلك المعنى وتفتكر الكلمة، وبعدين تقيّم نفسك: حفظتها ولا محتاج أراجعها.','الكلمات اللي بتغلط فيها بترجعلك تاني في الجلسة لحد ما تثبت.']],
+[/(الصوت مش شغال|مفيش صوت|النطق مش شغال|الصوت|صوت)/i,['الصوت بيعتمد على جهازك ومتصفحك. جرّب Chrome، وتأكد إن صوت الجهاز مفتوح، ومن الإعدادات اختار صوت تاني.','لو مفيش صوت، اتأكد إن اللغة متحملة على جهازك (إعدادات النطق في الموبايل).']],
+[/(الترجمة مش شغالة|مش بيترجم|الترجمة مش بتشتغل|مفيش نت|إنترنت|انترنت)/i,['الترجمة الجديدة والأمثلة محتاجين إنترنت. الكلمات اللي في مكتبتك والقاموس الجاهز بيشتغلوا من غير نت.']],
+[/(عايز اتعلم|عايز أتعلم|عاوز اتعلم|ابدأ منين|ابدا منين|from where)/i,['ابدأ بأكتر 50 كلمة استخدامًا، وبعدين اتعلم كلمات من مجال بتحبه (أكل، سفر، شغل).','ابدأ بـ 5 كلمات النهارده بس، واسمعهم واكتبهم، وبكرة راجعهم وضيف 5 جداد.']],
+[/(فرنساوي|فرنسي|french)/i,['الفرنساوي: انطق الحروف الأخيرة غالبًا مش بتتقال. اتعلم الكلمة مع «le» أو «la» عشان تعرف المذكر والمؤنث.']],
+[/(انجليزي|إنجليزي|english)/i,['الإنجليزي: اتعلم الكلمة جوه جملة، واسمع النطق مرتين قبل ما تكتبها.']],
+[/(إيطالي|ايطالي|italian)/i,['الإيطالي: النطق قريب من الكتابة، اتعلم الكلمة مع «il» أو «la» وكرر بصوت عالي.']],
+[/(الفرق بين|فرق بين|difference between)/i,['اكتب الكلمتين مع بعض في جملتين مختلفتين، وبعدين اسأل «أمثلة على الكلمة» وأنا أجيبلك جمل حقيقية (محتاج إنترنت).']],
+[/(تحفيز|حفزني|motivation|شجعني|دعم)/i,['إنت بتتحسن مع كل كلمة. الاستمرار أهم من السرعة.','كل كلمة جديدة بتفتحلك باب. كمّل!','القرار بتاع النهارده: 10 دقايق بس، وبكرة هتشكر نفسك.']],
+[/(سريع|بسرعة|اتعلم بسرعة|احفظ بسرعة)/i,['أسرع طريقة: اسمع، اكتب، استعمل في جملة، راجع بعد يوم. كده الكلمة بتثبت أسرع.']],
+[/(كلمات صعبة|الكلمات الصعبة|كلمات سهلة)/i,['الكلمات اللي بتغلط فيها بترجع تاني في الجلسة. وفي الإعدادات اختار ترتيب «الأصعب أولًا».']],
+[/(احفظ|حفظ).*(بكرة|الليلة|بسرعة)/i,['بكرة؟ ركز على 10 كلمات بس، كررهم بصوت عالي واكتبهم، ونام كويس. النوم بيثبّت الحفظ.']]
+);
+const aiChat0=null;
+const aiChat=q=>{if(/(اختبرني|اسألني|quiz|test me)/i.test(q)){const w=words.length?R(words):{w:R(DICT)[1],m:R(DICT)[2],l:lang};const d=words.length?w:DICT.find(x=>x[1]===w.w)||[lang,w.w,w.m],a=words.length?w.w:d[1],m=words.length?w.m:d[2];aiQz={a,w:a,m,l:w.l||lang};return[tip('❓ إيه الكلمة اللي معناها: <b dir="auto">'+esc(m)+'</b>؟ اكتب إجابتك (أو اكتب «خلاص» للإلغاء).')]}if(q.length>60||/معنى|ترجم|يعني|meaning|translat|مثال|أمثلة|امثلة/i.test(q))return null;for(const[r,a]of AIC)if(r.test(q)){if(a==='help')return aiHelp();const v=R(a);return[tip(typeof v==='function'?v():v)]}if(/(كلمة اليوم|word of the day)/i.test(q)){const w=words.length?R(words):null,d=R(DICT);return[tip('🌟 كلمة اليوم:'),w?row(w.w,w.m,w.l):row(d[1],d[2],d[0])]}return null};
 const aiFind=q=>{const n=nm(q);return words.find(w=>w.l===lang&&(nm(w.w)===n||nm(w.m)===n))||words.find(w=>nm(w.w)===n||nm(w.m)===n)};
 const aiDir=q=>{const f=isAr(q)?'ar':lang;return[f,f==='ar'?(lang==='ar'?'en':lang):'ar']};
 const isAr=x=>/[\u0600-\u06FF]/.test(x);
@@ -608,14 +613,14 @@ async function aiHow(q){let w=q,m='';if(q){try{const r=await aiLookup(q);w=r.w;m
 function aiSet(items,act){aiS.items=items;aiS.act=act||null;aiS.p=0;aiDraw()}
 function aiDraw(){if($('#ai').classList.contains('on'))pageFit($('#aiBox'),$('#aiPg'),aiS)}
 async function aiAsk(q){q=q.trim();if(!q)return;aiSet([tip('⏳ لحظة…')]);
- try{const cv=aiChat(q);if(cv){aiSet(cv);return}const g=aiParse(q),f=g[0]||'';let it,act=null;
+ try{if(aiQz){const z=aiQz;aiQz=null;if(!/^(خلاص|سيبك|وقف|stop|كفاية)/i.test(q)){const ok=nm(q)===nm(z.a);aiSet([tip(ok?R(['✅ صح! برافو','✅ ممتاز، إجابة صح','✅ عاش!']):'❌ مش بالظبط. الإجابة: <b dir="auto">'+esc(z.a)+'</b>'),row(z.w,z.m,z.l)]);return}}const cv=aiChat(q);if(cv){aiSet(cv);return}const g=aiParse(q),f=g[0]||'';let it,act=null;
   if(AIK.ex.test(q)){if(!f)throw 'need';it=await aiEx(f)}
   else if(AIK.how.test(q))it=await aiHow(f);
   else if(g.length>1){const rs=[];for(const x of g){try{rs.push(await aiLookup(x))}catch(e){rs.push({w:x,m:'—',l:lang,x:1})}}it=rs.map(r=>row(r.w,r.m,r.l));act=aiAdd(rs)}
   else if(f){const r=await aiLookup(f);it=[row(r.w,r.m,r.l)];act=aiAdd([r])}
   else it=aiHelp();
   aiSet(it,act)}
- catch(e){aiSet([tip(e==='need'?'اكتب الكلمة اللي عايز لها أمثلة.':'مقدرتش أجيب إجابة دلوقتي. الترجمة والأمثلة محتاجين إنترنت، جرّب تاني أو اكتب الكلمة بشكل مختلف.')])}}
+ catch(e){aiSet([tip(e==='need'?'اكتب الكلمة اللي عايز لها أمثلة.':R(['مش لاقيها في مكتبتك ولا في القاموس الجاهز، والترجمة الجديدة محتاجة إنترنت. جرّب تاني أو اكتب الكلمة بشكل مختلف.','مقدرتش أجيب إجابة دلوقتي. اتأكد من النت أو اكتب سؤالك بشكل تاني.']))])}}
 $('#aiGo').onclick=()=>aiAsk($('#aiQ').value);$('#aiQ').onkeydown=e=>{if(e.key==='Enter')aiAsk($('#aiQ').value)};
 $('#aiBox').onclick=e=>{const b=e.target.closest('[data-sp]');if(b)speak(b.dataset.sp,b.dataset.sl)};
 /* init */
