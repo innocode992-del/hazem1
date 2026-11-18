@@ -344,6 +344,77 @@ body:not([data-s=home]):not([data-s=excel]):not([data-s=chal]) .bk{opacity:.18}
 .dashboard{flex:0 1 auto!important;width:min(780px,100%);height:min(100%,440px);margin-inline:auto}
 .bk{width:min(78vmin,620px);height:min(50vmin,390px)}
 @media(max-aspect-ratio:1/1){#home.screen.on{justify-content:flex-end}.dashboard{height:min(100%,62vh);width:100%}.bk{top:22%;width:min(84vw,470px);height:min(54vw,300px)}}
+
+
+/* v8: responsive home screen; the book is a watermark behind the buttons */
+#home.screen.on{
+ position:relative;
+ isolation:isolate;
+ justify-content:center;
+ align-items:stretch;
+ padding:clamp(2px,1.2vmin,12px);
+}
+#home .bk{
+ position:absolute;
+ z-index:0;
+ left:50%;
+ top:50%;
+ width:min(76%,660px);
+ height:auto;
+ aspect-ratio:1.6;
+ translate:-50% -50%;
+ opacity:.13;
+ pointer-events:none;
+}
+#home .bki{position:absolute;inset:0}
+#home .dashboard{
+ position:relative;
+ z-index:2;
+ flex:1 1 auto!important;
+ width:min(900px,100%);
+ height:auto;
+ max-height:100%;
+ min-height:0;
+ margin:0 auto;
+ align-self:stretch;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ grid-template-rows:repeat(2,minmax(0,1fr));
+ gap:clamp(8px,1.5vw,18px);
+ padding:clamp(5px,1.2vw,14px);
+}
+#home .dashboard .key{
+ min-width:0;
+ min-height:0;
+ overflow:hidden;
+}
+@media(max-width:650px) and (orientation:portrait){
+ #home.screen.on{padding:4px;justify-content:center}
+ #home .bk{width:min(88%,480px);opacity:.10;top:49%}
+ #home .dashboard{
+  width:100%;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(3,minmax(0,1fr));
+  gap:clamp(7px,2.2vw,13px);
+  padding:clamp(5px,1.8vw,11px);
+ }
+ #home .dashboard .key{padding:clamp(6px,1.8vh,13px) 4px;gap:clamp(3px,1vh,8px)}
+ #home .dashboard .key .ic{font-size:clamp(1.8rem,9vw,3.4rem)}
+ #home .dashboard .key span:nth-child(2){font-size:clamp(.88rem,3.8vw,1.2rem);line-height:1.35}
+}
+@media(max-width:360px) and (orientation:portrait){
+ #home .dashboard{gap:6px;padding:4px}
+ #home .dashboard .key .ic{font-size:clamp(1.55rem,8.5vw,2.2rem)}
+ #home .dashboard .key span:nth-child(2){font-size:clamp(.8rem,3.7vw,.98rem)}
+}
+@media(max-height:620px){
+ #home .dashboard .key{padding-block:5px}
+ #home .dashboard .key .ic{font-size:clamp(1.45rem,6vh,2.8rem)}
+ #home .bk{opacity:.08}
+}
+@media(prefers-reduced-motion:reduce){
+ #home .bk{transition:none}
+}
+
 </style>
 </head>
 <body>
@@ -804,6 +875,10 @@ if(standalone())$('#dInst').hidden=true;
  FW.forEach((w,i)=>{h+=`<span class="fwd" style="--c:${PAL[(i+2)%PAL.length]};--d:${rnd(14,24).toFixed(0)}s;--dx:${Math.round(rnd(-40,40))}px;left:${rnd(2,80).toFixed(0)}%;top:${rnd(6,88).toFixed(0)}%">${w}</span>`});
  for(let i=0;i<(small?9:16);i++)h+=`<span class="rn" style="--c:${PAL[i%PAL.length]};--d:${rnd(24,40).toFixed(0)}s;--dl:-${rnd(0,36).toFixed(0)}s;--r:${Math.round(rnd(-40,40))}deg;left:${(i*6.4+rnd(0,4)).toFixed(0)}%;font-size:${Math.round(rnd(22,44))}px">${LT[(Math.random()*LT.length)|0]}</span>`;
  bg.innerHTML=h;
+ /* Put the book inside the home screen so it can sit behind the dashboard tiles. */
+ const bookEl=bg.querySelector('#bk');
+ const homeEl=$('#home');
+ if(bookEl&&homeEl)homeEl.prepend(bookEl);
  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
  const bk=$('#bk'),bi=$('#bki');let tx=0,ty=0,cx=0,cy=0,lx=null,ly=null,acc=0,lf=0,lm=0;
  const flap=()=>{const s=document.body.dataset.s;if(s==='practice'||s==='result')return;bk.classList.remove('flap');void bk.offsetWidth;bk.classList.add('flap')};
